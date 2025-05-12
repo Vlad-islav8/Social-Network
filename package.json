@@ -1,6 +1,6 @@
 {
   "name": "social-network",
-  "homepage": "https://Vlad-islav8.github.io/Social-Network/",
+  "homepage": "https://Vlad-islav8.github.io/Social-Network",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
