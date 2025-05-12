@@ -27,7 +27,7 @@ function App(props) {
         return <Preloader />
     }
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className='wrapper'>
                 <HeaderContainer />
                 <div className='mainContainer'>

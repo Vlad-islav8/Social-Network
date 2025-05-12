@@ -1,5 +1,9 @@
 {
+  "name": "social-network",
+  "homepage": "https://Vlad-islav8.github.io/Social-Network/",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -33,5 +37,8 @@
     "react-scripts": "^5.0.1",
     "redux-form": "^8.3.10",
     "redux-form-validators": "^3.3.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
