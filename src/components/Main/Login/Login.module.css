@@ -1,0 +1,125 @@
+:root {
+    --primary-color: #333;
+    --secondary-color: #6c757d;
+    --border-color: #e0e0e0;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --border-radius: 8px;
+}
+
+.loginBlock {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem 2rem; /* Shorthand padding */
+    box-sizing: border-box;
+    background-color: #222;
+    font-family: var(--font-family);
+}
+
+.loginHeader {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.loginForm {
+    width: 100%;
+    max-width: 400px; /* Consider making this a variable */
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.loginFormContainer {
+    padding: 2rem;
+}
+
+.loginName,
+.loginPassword {
+    margin-bottom: 1.5rem;
+}
+
+.loginForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.loginForm input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    box-sizing: border-box; /* Important for consistent width */
+}
+
+.loginForm input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.1);
+}
+
+.loginOut {
+    margin-top: 2rem;
+}
+
+.loginRememberMe {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 0.75rem;
+}
+
+.loginRememberMe label {
+    margin: 0;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.loginRememberMe input[type="checkbox"] {
+    margin: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    accent-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.outBtn button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.outBtn button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    .loginBlock {
+        padding: 2rem 1rem;
+    }
+
+    .loginFormContainer {
+        padding: 1.5rem;
+    }
+}

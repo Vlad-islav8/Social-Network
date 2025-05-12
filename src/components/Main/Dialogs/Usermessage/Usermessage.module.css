@@ -1,0 +1,51 @@
+.userMessage {
+    max-height: 90vh;
+    margin: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 16px 8px;
+}
+
+.userInfo img {
+    width: 100px;
+    height: 100%;
+    clip-path: circle(50%);
+}
+
+.userInfo h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+.message {
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100%;
+}
+
+.addMessage {
+    margin-bottom: 16px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.addMessage textarea {
+    max-width: 90%;
+    width: 100%;
+    resize: none;
+    min-height: 40px;
+    height: auto;
+    overflow: visible;
+}

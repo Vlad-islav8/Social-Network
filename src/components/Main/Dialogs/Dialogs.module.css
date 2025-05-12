@@ -1,0 +1,31 @@
+.dialogContent {
+    background-color: #bbbbbb;
+    grid-area: m;
+    color: #222;
+    display: grid;
+    grid-template-columns: 1fr 2fr ;
+    height: 100%;
+    max-height: 100%
+}
+.ithem {
+    color: red;
+    font-size: 30px;
+}
+
+.dialogUsers {
+    background-color: #222;
+}
+
+.dialogUsers h1 {
+    color: #fff;
+    text-align: center;
+}
+
+.dialogMessage {
+    background-color: #292929;
+
+}
+
+.user {
+
+}

@@ -1,0 +1,77 @@
+.nav {
+    margin: 0;
+    display: block;
+    width: 200px;
+    background-color: var(--bg-color);
+    background-color: #2b2b2b;
+    transition: margin 1s ease;
+    position: sticky;
+    top: 15%;
+    height: 85vh;
+    z-index: 9;
+}
+
+.activePanelBtn {
+    right: 0; 
+    position: absolute; 
+    width: 10px;
+    height: 40px;
+    top: 90%; 
+    transform: translateY(-50%); /* Точное выравнивание по центру */
+    margin-left: 0; /* Убираем лишний отступ */
+    font-size: 2rem;
+    transition: transform 0.5s ease,font-size 0.5s ease, right 0.5s ease;
+    cursor: pointer; /* Добавляем курсор, чтобы было понятно, что это кликабельный элемент */
+}
+
+.activePanelBtn:hover {
+    font-size: 2.5rem;
+}
+
+.activeBtn {
+    right: -20px; 
+    transform: rotate(180deg);
+}
+
+.unVisibule {
+    margin-left: -200px;
+}
+
+.nav ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    border-radius: 0;
+    color: #222222;
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    background-color: #f0f0f0;
+    transition: all 0.5s;
+}
+
+.item:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
+    z-index: 999;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.active {
+    border-radius: 0;
+    color: #222222;
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    background-color: white;
+    transition: all 0.5s;
+}
+
+.active:hover {
+    background-color: #f7f7f7;
+    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
+    z-index: 999;
+    padding: 1rem;
+    font-size: 1rem;
+}

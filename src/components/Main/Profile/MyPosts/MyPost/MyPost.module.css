@@ -1,0 +1,33 @@
+.ithem {
+    margin: 0.5rem;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+}
+
+.nameInfo {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: #e7e7e7;
+    border-radius: 20px;
+}
+
+.nameInfo h2 {
+    margin-left: 1rem;
+    color: black;
+
+}
+
+.nameInfo img {
+    width: 5rem;
+    height: 5rem;
+    clip-path: circle(50%);
+}
+
+.post {
+    border-radius: 20px;
+    margin-top: 1rem;
+    background-color: #e7e7e7;
+    padding: 0.5rem;
+    color: black;
+}

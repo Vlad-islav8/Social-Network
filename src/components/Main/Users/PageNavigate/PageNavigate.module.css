@@ -1,0 +1,54 @@
+
+.pageNavigate {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 1rem 0;
+}
+
+.navBtn, .searh {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.navBtn:hover, .searh:hover {
+    background-color: #f0f0f0;
+}
+
+.navBtn:active, .searh:active {
+    transform: scale(0.95);
+}
+
+.pageNavigate input {
+    width: 2.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+.pageNavigate input:focus {
+    outline: none;
+    border-color: #646cff;
+}
+
+.pageNavigate img {
+    width: 1.2rem;
+    height: 1.2rem;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.pageNavigate button:hover img {
+    opacity: 1;
+}

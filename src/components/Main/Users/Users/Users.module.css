@@ -1,0 +1,90 @@
+.selected {
+    font-weight: bold;
+    font-size: 20px;
+}
+.usersBlock {
+    padding: 1rem;
+}
+.userCard {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.ava {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+}
+
+.ava img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.moreInfoBlock {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainInfo h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.mainInfo h2 {
+    margin: 4px 0 0 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+
+.mainInfo h2 span {
+    font-weight: 600;
+}
+
+.more p {
+    margin: 8px 0 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.folowBtn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.folowBtn:hover {
+    background-color: #0056b3;
+}
+
+.folowBtn:active {
+    background-color: #004080;
+}
+
+.aboutText {
+    color: black;
+}

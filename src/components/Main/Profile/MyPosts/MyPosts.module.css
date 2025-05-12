@@ -1,0 +1,19 @@
+.ithem {
+    
+}
+
+.nameInfo {
+    display: flex;
+    padding: 8px 16px;
+    align-items: flex-end;
+}
+
+.nameInfo img {
+    width: 100px;
+    height: 100%;
+    clip-path: circle(50%);
+}
+
+.post {
+    padding: 8px;
+}
