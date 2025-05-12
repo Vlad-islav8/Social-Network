@@ -1,23 +1,23 @@
 import './App.css';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from './components/Main/Nav/Nav';
-import Music from './components/Main/Music/Music'
-import Settings from './components/Main/Settings/Settings'
-import DialogsContainer from './components/Main/Dialogs/DialogsContainer';
 import ProfileContainer from './components/Main/Profile/ProfileContainer';
-import UsersContainer from './components/Main/Users/UsersContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginContainer from "./components/Main/Login/LoginContainer";
-import { useEffect } from 'react';
 import { compose } from 'redux';
 import { withRouter } from './Hok/withRouter';
 import { connect } from 'react-redux';
 import { appInitializeThunkCreator } from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
-import PageNotFound from './components/PageNotFound/PageNotFound';
 import { getInitialize } from './redux/selectors/appSelector';
 import { getIsAuth } from './redux/selectors/isAuthSelector';
 
+const Music = lazy(() => import('./components/Main/Music/Music'))
+const Settings = lazy(() => import('./components/Main/Settings/Settings'))
+const DialogsContainer = lazy(() => import('./components/Main/Dialogs/DialogsContainer'))
+const UsersContainer = lazy(() => import('./components/Main/Users/UsersContainer'))
+const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer'))
+const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
 function App(props) {
     useEffect(() => {
         props.appInitializeThunkCreator()
@@ -36,13 +36,38 @@ function App(props) {
                         <Routes>
                             <Route path="/profile/:userId?" element={<ProfileContainer />} />
                             <Route path="/" element={<ProfileContainer />} />
-                            <Route path="/dialogs" element={<DialogsContainer />} />
-                            <Route path="/users" element={<UsersContainer />} />
-                            <Route path="/music" element={<Music />} />
-                            <Route path="/settings" element={<Settings />} />
-                            <Route path="/login" element={<LoginContainer />} />
-                            <Route path="*" element={<PageNotFound />} />
+                            <Route path="/dialogs" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <DialogsContainer />
+                                </Suspense>
+                            } />
+                            <Route path="/users" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <UsersContainer />
+                                </Suspense>
+                            } />
+                            <Route path="/music" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <Music />
+                                </Suspense>
+                            } />
+                            <Route path="/settings" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <Settings />
+                                </Suspense>
+                            } />
+                            <Route path="/login" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <LoginContainer />
+                                </Suspense>
+                            } />
+                            <Route path="*" element={
+                                <Suspense fallback={<Preloader />}>
+                                    <PageNotFound />
+                                </Suspense>
+                            } />
                         </Routes>
+
                     </div>
                 </div>
             </div>
