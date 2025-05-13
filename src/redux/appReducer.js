@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getAuthUserThunkCreator } from "./authReducer";
-const INITIALIZE = 'INITIALIZE'
 
 let initialState = {
     initialize: false

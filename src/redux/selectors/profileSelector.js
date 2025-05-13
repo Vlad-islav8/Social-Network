@@ -21,3 +21,7 @@ export const getProfileId = createSelector([getProfile],
         return profile.profile?.userId
     }
 )
+
+export const getUpdateAvaIsFetching = (state) => {
+    return state.profile.updateAvaIsFetching
+}

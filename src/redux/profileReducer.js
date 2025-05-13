@@ -13,7 +13,8 @@ let initialState = {
         },
     ],
     profile: null,
-    profileStatus: "Дефолт статус"
+    profileStatus: "Дефолт статус",
+    updateAvaIsFetching: false
 }
 
 const profileReducer = createSlice({
@@ -37,16 +38,39 @@ const profileReducer = createSlice({
         setProfileStatus(state, action) {
             state.profileStatus = action.payload
         },
+        setProfilePhoto(state, action) {
+            const small = action.payload.small
+            const large = action.payload.large
+            if(state.profile) {
+                state.profile.photos.small = small
+            }
+        },
+        setUpdateAvaISFetching(state, action) {
+            state.updateAvaIsFetching = action.payload
+        }
     }
 })
 
-export const {onAddPost, setUsersProfile, setProfileStatus} = profileReducer.actions
+export const {onAddPost, setUsersProfile, setProfileStatus, setProfilePhoto, setUpdateAvaISFetching} = profileReducer.actions
 export default profileReducer.reducer
+
+export const addAvatarThuckCreator = (avatar) => {
+    return async (dispatch) => {
+        dispatch(setUpdateAvaISFetching(true))
+        const responce = await profileAPI.addAvatar(avatar)
+        if(responce.resultCode === 0) {
+            dispatch(setProfilePhoto(responce))
+            dispatch(setUpdateAvaISFetching(false))
+
+        }
+    }
+}
 
 export const getUserProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         const responce = await profileAPI.getUserProfile(userId)
-        dispatch(setUsersProfile(responce))
+            dispatch(setUsersProfile(responce))
+            dispatch(setProfilePhoto(responce.photos))
     }
 }
 

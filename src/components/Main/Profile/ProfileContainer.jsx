@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import React, { useCallback, useEffect } from 'react'
 import Profile from './Profile';
 import {
+	addAvatarThuckCreator,
 	getStatusThunkCreator,
 	getUserProfileThunkCreator,
 	onAddPost,
@@ -11,12 +12,12 @@ import {withAuthRedirect} from "../../../Hok/withAuthRedirect";
 import {withRouter} from "../../../Hok/withRouter";
 import {compose} from "redux";
 import {isMe} from "../../../Hok/isMe";
-import { getPosts, getProfile, getProfileStatus } from '../../../redux/selectors/profileSelector';
+import { getPosts, getProfile, getProfileStatus, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {
+	let userId = props.params.userId || props.meId
 	useEffect(() => {
-		let userId = props.params.userId || props.meId
 		if (userId){
 			props.getUserProfileThunkCreator(userId)
 			props.getStatusThunkCreator(userId)
@@ -29,6 +30,12 @@ const ProfileContainer = (props) => {
 	const updateStatus = useCallback((newStaus) => {
 		props.updateStatusThuncCreator(newStaus)
 	}, [props.profileStatus])
+
+	const apdateAvatar = async (avatar) => {
+		await props.addAvatarThuckCreator(avatar)
+		props.getUserProfileThunkCreator(userId)
+	}
+
 	return (
 		<Profile
 			isMe={props.isMe}
@@ -37,6 +44,8 @@ const ProfileContainer = (props) => {
 			setUrlCurrent={props.setUrlCurrent}
 			profileStatus={props.profileStatus}
 			updateStatus={updateStatus}
+			apdateAvatar={apdateAvatar}
+			updateAvaIsFetching={props.updateAvaIsFetching}
 		/>
 	)
 }
@@ -46,7 +55,8 @@ const mapStateToProps = (state) => {
 		profile: getProfile(state),
 		posts: getPosts(state),
 		profileStatus: getProfileStatus(state),
-		meId: getMeId(state)
+		meId: getMeId(state),
+		updateAvaIsFetching: getUpdateAvaIsFetching(state)
 	}
 }
 
@@ -55,6 +65,7 @@ const mapDispatchToProps = {
 	getUserProfileThunkCreator,
 	getStatusThunkCreator,
 	updateStatusThuncCreator,
+	addAvatarThuckCreator,
 }
 
 export default compose(

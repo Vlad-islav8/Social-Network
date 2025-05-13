@@ -13,6 +13,8 @@ function Profile(props) {
                     profileStatus={props.profileStatus}
                     updateStatus={props.updateStatus}
                     isMe={props.isMe}
+                    apdateAvatar={props.apdateAvatar}
+                    updateAvaIsFetching={props.updateAvaIsFetching}
                 />
                 {
                     (props.isMe)
