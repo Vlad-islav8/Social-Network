@@ -3,15 +3,10 @@ import styles from './LoginButton.module.css'
 import React, { useState } from "react";
 
 const Pomogite = (props) => {
+    const active = (props.activeLoginBlock)
     return (
-        <div className={`${styles.Pomogite} ${(props.activeLoginBlock) ? styles.active : null}`}>
-            {
-                (props.isLogin)
-                    ?
-                    <button onClick={props.combineCallBacks} >Выйти</button>
-                    :
-                    undefined
-            }
+        <div className={`${styles.Pomogite} ${(active) ? styles.active : null}`}>
+            {(props.isLogin && <button onClick={props.combineCallBacks} disabled={(!active)}>Выйти</button>)}
         </div>
     )
 }
@@ -37,14 +32,19 @@ export const LoginButton = (props) => {
                 {
                     (isLogin)
                         ?
-                        <button onClick={handleActive} className={styles.profileData}>
-                            <p>{props.userData.fullName}</p>
+                        <div className={styles.profileData}>
                             {
                                 (props.userData.photos.small) ?
-                                    <img src={props.userData.photos.small} alt="" /> :
+                                    <Link to='/profile'>
+                                        <img src={props.userData.photos.small} className={styles.headerAvatar} alt="Аватар" /> 
+                                    </Link> :
                                     null
                             }
-                        </button>
+                            <button onClick={handleActive}>
+                                <p>{props.userData.fullName}</p>
+                            </button>
+
+                        </div>
                         :
                         <div className={styles.LoginOut}>
                             <NavLink to='/login'>Войти в аккаут</NavLink>

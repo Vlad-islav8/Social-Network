@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './MyPost.module.css'
 import Preloader from "../../../../Preloader/Preloader";
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function MyPost(props) {
-    debugger
     return (
         (!props.profile) ?
             <Preloader /> :

@@ -34,7 +34,6 @@ export const usersAPI = {
 
 export const authAPI = {
     getAuthUser() {
-
         return (
             inctance
                 .get('auth/me')
@@ -76,6 +75,15 @@ export const profileAPI = {
         return (
             inctance
                 .put('profile/status', {status: newStatus})
+                .then(response => response.data)
+        )
+    },
+    addAvatar(avatar) {
+        const fromData = new FormData()
+        fromData.append('image', avatar)
+        return (
+            inctance
+                .put('profile/photo', fromData)
                 .then(response => response.data)
         )
     }
