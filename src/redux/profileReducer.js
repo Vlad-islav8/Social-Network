@@ -14,7 +14,8 @@ let initialState = {
     ],
     profile: null,
     profileStatus: "Дефолт статус",
-    updateAvaIsFetching: false
+    updateAvaIsFetching: false,
+    aboutMe: 'Статус отсутсвует'
 }
 
 const profileReducer = createSlice({
@@ -54,6 +55,15 @@ const profileReducer = createSlice({
 export const {onAddPost, setUsersProfile, setProfileStatus, setProfilePhoto, setUpdateAvaISFetching} = profileReducer.actions
 export default profileReducer.reducer
 
+export const putProfileDataThuncCreator = (data) => {
+    return async (dispatch) => {
+        const responce = await profileAPI.putProfileData(data)
+        if(responce.resultCode === 0) {
+
+        }
+    }
+}
+
 export const addAvatarThuckCreator = (avatar) => {
     return async (dispatch) => {
         dispatch(setUpdateAvaISFetching(true))
@@ -67,6 +77,7 @@ export const addAvatarThuckCreator = (avatar) => {
 }
 
 export const getUserProfileThunkCreator = (userId) => {
+    
     return async (dispatch) => {
         const responce = await profileAPI.getUserProfile(userId)
             dispatch(setUsersProfile(responce))

@@ -1,5 +1,5 @@
 import './App.css';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from './components/Main/Nav/Nav';
 import ProfileContainer from './components/Main/Profile/ProfileContainer';
@@ -17,8 +17,15 @@ const Settings = lazy(() => import('./components/Main/Settings/Settings'))
 const DialogsContainer = lazy(() => import('./components/Main/Dialogs/DialogsContainer'))
 const UsersContainer = lazy(() => import('./components/Main/Users/UsersContainer'))
 const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer'))
+
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
 function App(props) {
+    const [activePanel, setActivePanel] = useState(false)
+
+    const handleActivePanel = () => {
+        (activePanel) ? setActivePanel(false) : setActivePanel(true)
+    }
+
     useEffect(() => {
         props.appInitializeThunkCreator()
     }, [props.appInitializeThunkCreator])
@@ -26,15 +33,24 @@ function App(props) {
     if (!props.initialize || props.isAuth === undefined) {
         return <Preloader />
     }
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className='wrapper'>
                 <HeaderContainer />
                 <div className='mainContainer'>
-                    <Nav />
+                    <Nav
+                        activePanel={activePanel}
+                        handleActivePanel={handleActivePanel}
+                    />
                     <div className='routes'>
                         <Routes>
-                            <Route path="/profile/:userId?" element={<ProfileContainer />} />
+                            <Route path="/profile/:userId?" element={
+                                <ProfileContainer
+                                    handleActivePanel={handleActivePanel}
+                                    activePanel={activePanel}
+                                />
+                            } />
                             <Route path="/" element={<ProfileContainer />} />
                             <Route path="/dialogs" element={
                                 <Suspense fallback={<Preloader />}>

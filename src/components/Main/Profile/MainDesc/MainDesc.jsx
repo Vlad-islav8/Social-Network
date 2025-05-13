@@ -1,10 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './MainDesc.module.css'
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import { Avatar } from './Avatar/Avatar';
+import EditProfileReduxForm from './EditProfile/EditProfile';
 
 const MainDesc = (props) => {
-    const addFhotoInutRef = useRef(null)
     const isMe = props.isMe
+
+    const [editMode, setEditMode] = useState(false)
+
     const converFunction = (contacts) => {
         if (contacts) {
             const resultFunc = (Obj) => {
@@ -21,49 +25,37 @@ const MainDesc = (props) => {
     }
 
     const contactsArr = converFunction(props.profile.contacts)
-    const handleUpdateAvatar = () => {
-
-        if (addFhotoInutRef) {
-            props.apdateAvatar(addFhotoInutRef.current.files[0])
+    const handleUpdateAvatar = (avatar) => {
+        props.apdateAvatar(avatar)
+    }
+    const handleEditMode = () => {
+        (editMode) ? setEditMode(false) : setEditMode(true)
+        if (!props.activePanel) {
+            // props.handleActivePanel()
         }
     }
-
     return (
         <div className={styles.mainDesc}>
             <div className={styles.mainInfo}>
-                {
-                    (props.updateAvaIsFetching)
-                        ?
-                        <div className={styles.loaderContainer}>
-                            <img
-                                className={`${styles.avatar} ${styles.avatarLoading}`}
-                                src={
-                                    (!props.profile.photos.small) ?
-                                        'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
-                                        props.profile.photos.small
-                                }
-                                alt="avatar" />
-                            <span className={styles.loader}></span>
-                        </div>
-                        :
-                        <img
-                            className={styles.avatar}
-                            src={
-                                (!props.profile.photos.small) ?
-                                    'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
-                                    props.profile.photos.small
-                            }
-                            alt="avatar" />
-                }
-                {
-                    (isMe && <>
-                        <input type='file' ref={addFhotoInutRef} />
-                        <button onClick={handleUpdateAvatar}>Загрузить фото</button>
-                    </>
-                    )
+                <Avatar
+                    updateAvaIsFetching={props.updateAvaIsFetching}
+                    smallPhoto={props.profile.photos.small}
+                />
+                {(isMe &&
+                    <div className={styles.editProfile}>
+                        <button onClick={handleEditMode}>Редактировать профиль</button>
 
-
-                }
+                        <EditProfileReduxForm
+                            handleEditMode={handleEditMode}
+                            handleActivePanel={props.handleActivePanel}
+                            activePanel={props.activePanel}
+                            editMode={editMode}
+                            handlePutUserData={props.handlePutUserData}
+                            profile={props.profile}
+                            handleUpdateAvatar={handleUpdateAvatar}
+                        />
+                    </div>
+                )}
 
                 <div className={styles.named}>
                     <h1>{props.profile.fullName}</h1>
