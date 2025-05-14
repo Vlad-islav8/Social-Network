@@ -13,10 +13,9 @@ function Profile(props) {
                     profileStatus={props.profileStatus}
                     updateStatus={props.updateStatus}
                     isMe={props.isMe}
-                    apdateAvatar={props.apdateAvatar}
+                    updateAvatar={props.updateAvatar}
                     updateAvaIsFetching={props.updateAvaIsFetching}
-                    handleActivePanel={props.handleActivePanel}
-                    activePanel={props.activePanel}
+
                     handlePutUserData={props.handlePutUserData}
                 />
                 {

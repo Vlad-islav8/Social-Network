@@ -26,13 +26,11 @@ const MainDesc = (props) => {
 
     const contactsArr = converFunction(props.profile.contacts)
     const handleUpdateAvatar = (avatar) => {
-        props.apdateAvatar(avatar)
+        props.updateAvatar(avatar)
     }
+
     const handleEditMode = () => {
         (editMode) ? setEditMode(false) : setEditMode(true)
-        if (!props.activePanel) {
-            // props.handleActivePanel()
-        }
     }
     return (
         <div className={styles.mainDesc}>
@@ -46,12 +44,11 @@ const MainDesc = (props) => {
                         <button onClick={handleEditMode}>Редактировать профиль</button>
 
                         <EditProfileReduxForm
-                            handleEditMode={handleEditMode}
                             handleActivePanel={props.handleActivePanel}
-                            activePanel={props.activePanel}
                             editMode={editMode}
                             handlePutUserData={props.handlePutUserData}
                             profile={props.profile}
+                            handleEditMode={handleEditMode}
                             handleUpdateAvatar={handleUpdateAvatar}
                         />
                     </div>

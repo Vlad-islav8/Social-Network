@@ -20,11 +20,6 @@ const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer
 
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
 function App(props) {
-    const [activePanel, setActivePanel] = useState(false)
-
-    const handleActivePanel = () => {
-        (activePanel) ? setActivePanel(false) : setActivePanel(true)
-    }
 
     useEffect(() => {
         props.appInitializeThunkCreator()
@@ -39,17 +34,11 @@ function App(props) {
             <div className='wrapper'>
                 <HeaderContainer />
                 <div className='mainContainer'>
-                    <Nav
-                        activePanel={activePanel}
-                        handleActivePanel={handleActivePanel}
-                    />
+                    <Nav/>
                     <div className='routes'>
                         <Routes>
                             <Route path="/profile/:userId?" element={
-                                <ProfileContainer
-                                    handleActivePanel={handleActivePanel}
-                                    activePanel={activePanel}
-                                />
+                                <ProfileContainer/>
                             } />
                             <Route path="/" element={<ProfileContainer />} />
                             <Route path="/dialogs" element={

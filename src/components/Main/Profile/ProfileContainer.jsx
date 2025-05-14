@@ -17,7 +17,6 @@ import { getPosts, getProfile, getProfileStatus, getUpdateAvaIsFetching } from '
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {
-	debugger
 	let userId = props.params.userId || props.meId
 	useEffect(() => {
 		if (userId) {
@@ -33,7 +32,7 @@ const ProfileContainer = (props) => {
 		props.updateStatusThuncCreator(newStaus)
 	}, [props.profileStatus])
 
-	const apdateAvatar = async (avatar) => {
+	const updateAvatar = async (avatar) => {
 		await props.addAvatarThuckCreator(avatar)
 		props.getUserProfileThunkCreator(userId)
 	}
@@ -50,10 +49,9 @@ const ProfileContainer = (props) => {
 			setUrlCurrent={props.setUrlCurrent}
 			profileStatus={props.profileStatus}
 			updateStatus={updateStatus}
-			apdateAvatar={apdateAvatar}
+			updateAvatar={updateAvatar}
 			updateAvaIsFetching={props.updateAvaIsFetching}
-			handleActivePanel={props.handleActivePanel}
-			activePanel={props.activePanel}
+
 			handlePutUserData={handlePutUserData}
 		/>
 	)

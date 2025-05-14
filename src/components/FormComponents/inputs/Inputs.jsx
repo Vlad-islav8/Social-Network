@@ -46,8 +46,6 @@ export const EditProfileInput = ({input, meta, placeholder, type, handleLookingJ
             className={styles.EditProfileInput}
             onClick={handleLookingJob}
             accept={accept}
-            onChange={() => {handleSetFile(input.value.FileList)}}
-            value={null}
             />
     )
 }

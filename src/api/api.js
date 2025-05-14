@@ -64,6 +64,7 @@ export const profileAPI = {
         )
     },
     putProfileData(data) {
+        debugger
       return (
         inctance
             .put('profile', data)
@@ -87,7 +88,6 @@ export const profileAPI = {
     addAvatar(avatar) {
         const formData = new FormData()
         formData.append('Image', avatar)
-        
         return (
             inctance
                 .put('profile/photo', formData)
