@@ -63,8 +63,14 @@ export const profileAPI = {
                 .then(response => response.data)
         )
     },
+    putProfileData(data) {
+      return (
+        inctance
+            .put('profile', data)
+            .then(responce => responce.data)
+      )
+    },
     getProfileStatus(userId) {
-        console.trace()
         return (
             inctance
                 .get(`profile/status/${userId}`)
@@ -79,11 +85,11 @@ export const profileAPI = {
         )
     },
     addAvatar(avatar) {
-        const fromData = new FormData()
-        fromData.append('image', avatar)
+        const formData = new FormData()
+        formData.append('Image', avatar)
         return (
             inctance
-                .put('profile/photo', fromData)
+                .put('profile/photo', formData)
                 .then(response => response.data)
         )
     }

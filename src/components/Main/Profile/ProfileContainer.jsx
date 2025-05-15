@@ -6,19 +6,20 @@ import {
 	getStatusThunkCreator,
 	getUserProfileThunkCreator,
 	onAddPost,
+	putProfileDataThuncCreator,
 	updateStatusThuncCreator,
 } from "../../../redux/profileReducer";
-import {withAuthRedirect} from "../../../Hok/withAuthRedirect";
-import {withRouter} from "../../../Hok/withRouter";
-import {compose} from "redux";
-import {isMe} from "../../../Hok/isMe";
-import { getPosts, getProfile, getProfileStatus, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
+import { withAuthRedirect } from "../../../Hok/withAuthRedirect";
+import { withRouter } from "../../../Hok/withRouter";
+import { compose } from "redux";
+import { isMe } from "../../../Hok/isMe";
+import { getPosts, getProfile, getProfileStatus, getPutFetching, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {
 	let userId = props.params.userId || props.meId
 	useEffect(() => {
-		if (userId){
+		if (userId) {
 			props.getUserProfileThunkCreator(userId)
 			props.getStatusThunkCreator(userId)
 		} else {
@@ -26,13 +27,17 @@ const ProfileContainer = (props) => {
 		}
 	}, [props.params.userId, props.meId])
 
-	
+
 	const updateStatus = useCallback((newStaus) => {
 		props.updateStatusThuncCreator(newStaus)
 	}, [props.profileStatus])
 
-	const apdateAvatar = async (avatar) => {
+	const updateAvatar = async (avatar) => {
 		await props.addAvatarThuckCreator(avatar)
+		props.getUserProfileThunkCreator(userId)
+	}
+	const handlePutUserData = async (data) => {
+		await props.putProfileDataThuncCreator(data)
 		props.getUserProfileThunkCreator(userId)
 	}
 
@@ -44,8 +49,10 @@ const ProfileContainer = (props) => {
 			setUrlCurrent={props.setUrlCurrent}
 			profileStatus={props.profileStatus}
 			updateStatus={updateStatus}
-			apdateAvatar={apdateAvatar}
+			updateAvatar={updateAvatar}
 			updateAvaIsFetching={props.updateAvaIsFetching}
+			handlePutUserData={handlePutUserData}
+			putFetching={props.putFetching}
 		/>
 	)
 }
@@ -56,7 +63,8 @@ const mapStateToProps = (state) => {
 		posts: getPosts(state),
 		profileStatus: getProfileStatus(state),
 		meId: getMeId(state),
-		updateAvaIsFetching: getUpdateAvaIsFetching(state)
+		updateAvaIsFetching: getUpdateAvaIsFetching(state),
+		putFetching: getPutFetching(state)
 	}
 }
 
@@ -66,6 +74,8 @@ const mapDispatchToProps = {
 	getStatusThunkCreator,
 	updateStatusThuncCreator,
 	addAvatarThuckCreator,
+	putProfileDataThuncCreator,
+	
 }
 
 export default compose(

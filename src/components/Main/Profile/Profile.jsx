@@ -7,15 +7,21 @@ function Profile(props) {
     if (props.profile) {
         return (
             <main className={styles.main}>
-                <MainDesc
-                    profile={props.profile}
-                    urlCurrnet={props.urlCurrnet}
-                    profileStatus={props.profileStatus}
-                    updateStatus={props.updateStatus}
-                    isMe={props.isMe}
-                    apdateAvatar={props.apdateAvatar}
-                    updateAvaIsFetching={props.updateAvaIsFetching}
-                />
+                {
+                    (props.putFetching) ?
+                        <Preloader /> :
+                        <MainDesc
+                            profile={props.profile}
+                            urlCurrnet={props.urlCurrnet}
+                            profileStatus={props.profileStatus}
+                            updateStatus={props.updateStatus}
+                            isMe={props.isMe}
+                            updateAvatar={props.updateAvatar}
+                            updateAvaIsFetching={props.updateAvaIsFetching}
+                            handlePutUserData={props.handlePutUserData}
+                        />
+                }
+
                 {
                     (props.isMe)
                         ? <AddPostForm

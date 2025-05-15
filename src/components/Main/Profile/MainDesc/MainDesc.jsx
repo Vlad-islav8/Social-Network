@@ -1,10 +1,14 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styles from './MainDesc.module.css'
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
-
+import { Avatar } from './Avatar/Avatar';
+import EditProfileReduxForm from './EditProfile/EditProfile';
+import editProfile from '../../../../images/editProfile.svg'
 const MainDesc = (props) => {
-    const addFhotoInutRef = useRef(null)
     const isMe = props.isMe
+
+    const [editMode, setEditMode] = useState(false)
+
     const converFunction = (contacts) => {
         if (contacts) {
             const resultFunc = (Obj) => {
@@ -21,68 +25,86 @@ const MainDesc = (props) => {
     }
 
     const contactsArr = converFunction(props.profile.contacts)
-    const handleUpdateAvatar = () => {
-
-        if (addFhotoInutRef) {
-            props.apdateAvatar(addFhotoInutRef.current.files[0])
-        }
+    const handleUpdateAvatar = (avatar) => {
+        props.updateAvatar(avatar)
     }
 
+    const handleEditMode = () => {
+        (editMode) ? setEditMode(false) : setEditMode(true)
+    }
     return (
         <div className={styles.mainDesc}>
             <div className={styles.mainInfo}>
-                {
-                    (props.updateAvaIsFetching)
-                        ?
-                        <div className={styles.loaderContainer}>
-                            <img
-                                className={`${styles.avatar} ${styles.avatarLoading}`}
-                                src={
-                                    (!props.profile.photos.small) ?
-                                        'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
-                                        props.profile.photos.small
-                                }
-                                alt="avatar" />
-                            <span className={styles.loader}></span>
-                        </div>
-                        :
-                        <img
-                            className={styles.avatar}
-                            src={
-                                (!props.profile.photos.small) ?
-                                    'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
-                                    props.profile.photos.small
-                            }
-                            alt="avatar" />
-                }
-                {
-                    (isMe && <>
-                        <input type='file' ref={addFhotoInutRef} />
-                        <button onClick={handleUpdateAvatar}>Загрузить фото</button>
-                    </>
-                    )
+                <div className={styles.headerProfile}>
+                    <img
+                        src={
+                            (props.profile.photos.large) ? props.profile.photos.large : "https://pic.rutubelist.ru/userappearance/f9/50/f95049ea40056572c77e816b2944a214.jpeg"
+                        }
 
-
-                }
-
-                <div className={styles.named}>
-                    <h1>{props.profile.fullName}</h1>
-                    <ProfileStatus
-                        profileStatus={props.profileStatus}
-                        updateStatus={props.updateStatus}
-                        isMe={isMe}
+                        alt="шапка профиля"
+                        className={styles.headerImage}
                     />
+                    <div className={styles.mainInfoWrapper}>
+                        <Avatar
+                            updateAvaIsFetching={props.updateAvaIsFetching}
+                            smallPhoto={props.profile.photos.small}
+                            handleUpdateAvatar={handleUpdateAvatar}
+                        />
+                        <div className={styles.named}>
+                            <h1>{props.profile.fullName}</h1>
+                            <ProfileStatus
+                                profileStatus={props.profileStatus}
+                                updateStatus={props.updateStatus}
+                                isMe={isMe}
+                            />
+                        </div>
+                    </div>
+
+                    {(isMe &&
+                        <div className={styles.editBtnWrapper}>
+                            <div className={styles.editProfile}>
+                                <button onClick={handleEditMode} title='редактировать профиль'>
+                                    <img className={styles.editImage}
+                                        src={editProfile}
+                                        alt="Редактировать профиль" />
+                                </button>
+
+                                <EditProfileReduxForm
+                                    handleActivePanel={props.handleActivePanel}
+                                    editMode={editMode}
+                                    handlePutUserData={props.handlePutUserData}
+                                    profile={props.profile}
+                                    handleEditMode={handleEditMode}
+                                    handleUpdateAvatar={handleUpdateAvatar}
+                                />
+                            </div>
+                        </div>
+
+                    )}
                 </div>
+
+
+
             </div>
+
             <div className={styles.decription}>
                 <div className={styles.mainDescription}>
-                    <div className={styles.workStatus}>
-                        {(props.profile.aboutMe && <h2> о себе: {props.profile.aboutMe}</h2>)}
-                        <p>Статус занятости:
+                    <ul className={styles.workStatus}>
+                        {(
+                            props.profile.aboutMe &&
+                            <li>
+                                о себе: <span>{props.profile.aboutMe}</span>
+                            </li>
+                        )}
+
+                        <li>
+                            Статус занятости:
                             {(props.profile.lookingForAJob) ? <span> В поиске работы </span> : <span> Работаю</span>}
-                            <p>{props.profile.lookingForAJobDescription}</p>
-                        </p>
-                    </div>
+                        </li>
+                        <li>
+                            Описание к работе: <span>{props.profile.lookingForAJobDescription}</span>
+                        </li>
+                    </ul>
                 </div>
                 <ul>
                     {

@@ -31,8 +31,21 @@ export const BazeTextArea = ({input, meta, placeholder, type}) => {
     )
 }
 
-export const AddPostTextArea = ({input, meta, placeholder, type}) => {
+export const AddPostTextArea = ({input, meta, placeholder, type, }) => {
     return (
         <textarea placeholder={placeholder} type={type} {...input} className={styles.addPostTextArea}/>
+    )
+}
+
+export const EditProfileInput = ({input, meta, placeholder, type, handleLookingJob, accept, fileValue, handleSetFile}) => {
+    return (
+        <input 
+            placeholder={placeholder} 
+            type={type} 
+            {...input} 
+            className={styles.EditProfileInput}
+            onClick={handleLookingJob}
+            accept={accept}
+            />
     )
 }
