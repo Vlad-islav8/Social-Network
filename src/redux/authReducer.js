@@ -72,6 +72,7 @@ export const loginUserThuncCreator = (email, password, rememberMe = false) => {
             const loginUserResponce = await authAPI.loginUser(email, password, rememberMe)
             dispatch(setLoadingStatus(false))
             if (loginUserResponce.data.resultCode === 0) {
+                debugger
                 dispatch(setErrorMessage(null))
                 dispatch(getAuthUserThunkCreator());
             } else {

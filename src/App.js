@@ -32,47 +32,48 @@ function App(props) {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className='wrapper'>
-                <HeaderContainer />
-                <div className='mainContainer'>
-                    <Nav/>
-                    <div className='routes'>
-                        <Routes>
-                            <Route path="/profile/:userId?" element={
-                                <ProfileContainer/>
-                            } />
-                            <Route path="/" element={<ProfileContainer />} />
-                            <Route path="/dialogs" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <DialogsContainer />
-                                </Suspense>
-                            } />
-                            <Route path="/users" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <UsersContainer />
-                                </Suspense>
-                            } />
-                            <Route path="/music" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <Music />
-                                </Suspense>
-                            } />
-                            <Route path="/settings" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <Settings />
-                                </Suspense>
-                            } />
-                            <Route path="/login" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <LoginContainer />
-                                </Suspense>
-                            } />
-                            <Route path="*" element={
-                                <Suspense fallback={<Preloader />}>
-                                    <PageNotFound />
-                                </Suspense>
-                            } />
-                        </Routes>
-
+                <div className='appContainer'>
+                    <HeaderContainer />
+                    <div className='mainContainer'>
+                        <Nav/>
+                        <div className='routes'>
+                            <Routes>
+                                <Route path="/profile/:userId?" element={
+                                    <ProfileContainer/>
+                                } />
+                                <Route path="/" element={<ProfileContainer />} />
+                                <Route path="/dialogs" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <DialogsContainer />
+                                    </Suspense>
+                                } />
+                                <Route path="/users" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <UsersContainer />
+                                    </Suspense>
+                                } />
+                                <Route path="/music" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <Music />
+                                    </Suspense>
+                                } />
+                                <Route path="/settings" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <Settings />
+                                    </Suspense>
+                                } />
+                                <Route path="/login" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <LoginContainer />
+                                    </Suspense>
+                                } />
+                                <Route path="*" element={
+                                    <Suspense fallback={<Preloader />}>
+                                        <PageNotFound />
+                                    </Suspense>
+                                } />
+                            </Routes>
+                        </div>
                     </div>
                 </div>
             </div>
