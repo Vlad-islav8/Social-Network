@@ -64,7 +64,6 @@ export const profileAPI = {
         )
     },
     putProfileData(data) {
-        debugger
       return (
         inctance
             .put('profile', data)

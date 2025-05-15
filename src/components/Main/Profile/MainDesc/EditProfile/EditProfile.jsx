@@ -63,11 +63,11 @@ const EditProfile = (props) => {
         const profile = props.profile
         const contacts = profile.contacts
         const userData = {
-            AboutMe: AboutMe,
+            aboutMe: AboutMe,
             userId: profile.userId,
             lookingForAJob: lookingForAJob || profile.lookingForAJob,
             lookingForAJobDescription: lookingForAJobDescription || profile.lookingForAJobDescription,
-            fullName: fullname,
+            fullName: fullname || profile.fullName,
             contacts: {
                 github: contacts.github,
                 vk: contacts.vk,

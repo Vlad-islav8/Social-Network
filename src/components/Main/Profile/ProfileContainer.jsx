@@ -13,7 +13,7 @@ import { withAuthRedirect } from "../../../Hok/withAuthRedirect";
 import { withRouter } from "../../../Hok/withRouter";
 import { compose } from "redux";
 import { isMe } from "../../../Hok/isMe";
-import { getPosts, getProfile, getProfileStatus, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
+import { getPosts, getProfile, getProfileStatus, getPutFetching, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {
@@ -51,8 +51,8 @@ const ProfileContainer = (props) => {
 			updateStatus={updateStatus}
 			updateAvatar={updateAvatar}
 			updateAvaIsFetching={props.updateAvaIsFetching}
-
 			handlePutUserData={handlePutUserData}
+			putFetching={props.putFetching}
 		/>
 	)
 }
@@ -63,7 +63,8 @@ const mapStateToProps = (state) => {
 		posts: getPosts(state),
 		profileStatus: getProfileStatus(state),
 		meId: getMeId(state),
-		updateAvaIsFetching: getUpdateAvaIsFetching(state)
+		updateAvaIsFetching: getUpdateAvaIsFetching(state),
+		putFetching: getPutFetching(state)
 	}
 }
 

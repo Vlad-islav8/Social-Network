@@ -15,7 +15,7 @@ let initialState = {
     profile: null,
     profileStatus: "Дефолт статус",
     updateAvaIsFetching: false,
-    aboutMe: 'Статус отсутсвует',
+    AboutMe: 'Статус отсутсвует',
     error: null,
     putFetching: false,
 
@@ -83,7 +83,6 @@ export const addAvatarThuckCreator = (avatar) => {
 }
 
 export const getUserProfileThunkCreator = (userId) => {
-
     return async (dispatch) => {
         const responce = await profileAPI.getUserProfile(userId)
             dispatch(setUsersProfile(responce))

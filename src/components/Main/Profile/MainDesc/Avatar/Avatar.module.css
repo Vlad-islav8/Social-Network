@@ -54,3 +54,13 @@
 .avatar:hover {
     transform: scale(1.05);
 }
+
+.avatarContainer input{
+    display: none;
+}
+
+.mainInfoWrapper {
+    position: absolute;
+    bottom: 4rem;
+    left: 2rem;
+}
