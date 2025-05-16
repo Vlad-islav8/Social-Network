@@ -1,0 +1,160 @@
+.EditProfile {
+    margin: auto auto;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9;
+    display: none;
+    backdrop-filter: blur(3px);
+
+}
+
+.editModeActive {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.FormContainer {
+    position: absolute;
+    width: 50%;
+    background: rgba(30, 30, 30, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    color: white;
+    top: 25%;
+    transition: all .5s ease;
+}
+
+.FormContainer:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+}
+
+.FormContainer:active {
+    transform: scale(0.95);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header span {
+    color: white;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.header button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    filter: brightness(0.8);
+    transition: filter 0.2s ease;
+}
+
+.header button:hover {
+    filter: brightness(1.2);
+}
+
+.EditProfileForm {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+}
+
+.inputItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputItem label {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.inputItem input,
+.inputItem textarea {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.inputItem input:focus,
+.inputItem textarea:focus {
+    border-color: #646cff;
+    background: rgba(100, 108, 255, 0.15);
+}
+
+.submit {
+    display: flex;
+    justify-content: center;
+}
+
+.submit button img {
+    width: 50px;
+    height: 50px;
+    transition: transform .5s ease;
+}
+
+.submit button img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .FormContainer {
+        width: 95%;
+    }
+
+    .EditProfileForm {
+        padding: 0 1.5rem 1.5rem;
+    }
+}
+
+
+.removeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.header {
+    display: block;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.headerText {
+    font-size: 1.5rem;
+}
+
+.checkboxInput {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.label p {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.EditProfileInput {
+    background-color: #fff;
+    color: black;
+    border: 1px black solid;
+    padding: 0.5rem;
+}

@@ -1,0 +1,132 @@
+.mainInfo {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.headerProfile {
+    position: relative;
+    max-height: 400px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+}
+
+.headerImage {
+    display: block;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mainInfoWrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+    padding: 0 2rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    width: calc(100% - 4rem);
+}
+
+.named {
+    margin-left: 2rem;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.named h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.editBtnWrapper {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: rgba(0, 0, 0, 0.23);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    box-shadow: 1px 1px 50px 1px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    transition: all 0.3s ease;
+}
+
+
+
+.editBtnWrapper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editImage {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.5s ease;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.editProfile:hover .editImage {
+    animation: 1s linear editProfileAnimation;
+}
+
+@keyframes editProfileAnimation {
+    0% { transform: rotate(0) scale(1); }
+    50% { transform: rotate(45deg) scale(1.1); }
+    100% { transform: rotate(0) scale(1); }
+}
+
+@media (max-width: 768px) {
+    .headerProfile {
+        max-height: 350px;
+    }
+
+    .headerImage {
+        height: 350px;
+    }
+
+    .mainInfoWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        bottom: 1rem;
+        gap: 1rem;
+        width: calc(100% - 2rem);
+        padding: 0 1rem;
+    }
+
+    .named {
+        margin-left: 0;
+        font-size: 1.8rem;
+    }
+
+    .editBtnWrapper {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .editImage {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerImage {
+        height: 300px;
+    }
+
+    .named {
+        font-size: 1.5rem;
+    }
+
+    .mainInfoWrapper {
+        bottom: 0.5rem;
+    }
+}

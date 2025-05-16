@@ -5,8 +5,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-wrapper-content {
-  background-color: #bbbbbb;
-  grid-area: m;
-  color: #222;
-}

@@ -5,9 +5,8 @@ function Header(props) {
     return (
         <header className={styles.header}>
             <Link to='/'><h1>My social network</h1></Link>
-            <div>
-                <LoginButton userData={props.userData} isAuth={props.isAuth} loginOut={props.loginOut}/>
-            </div>
+
+            <LoginButton userData={props.userData} isAuth={props.isAuth} loginOut={props.loginOut}/>
         </header>
     )
 }

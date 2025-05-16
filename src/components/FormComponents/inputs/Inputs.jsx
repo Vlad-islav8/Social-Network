@@ -37,7 +37,7 @@ export const AddPostTextArea = ({input, meta, placeholder, type, }) => {
     )
 }
 
-export const EditProfileInput = ({input, meta, placeholder, type, handleLookingJob, accept, fileValue, handleSetFile}) => {
+export const EditProfileInput = ({input, meta, placeholder, type, handleLookingJob, accept, value}) => {
     return (
         <input 
             placeholder={placeholder} 
@@ -46,6 +46,23 @@ export const EditProfileInput = ({input, meta, placeholder, type, handleLookingJ
             className={styles.EditProfileInput}
             onClick={handleLookingJob}
             accept={accept}
+            value={input.value}
             />
+    )
+}
+
+export const AddLinkInput = ({input, meta, placeholder, type,}) => {
+    const errorMessage = meta.touched && meta.error
+    return (
+        <>
+            <input
+                placeholder={placeholder}
+                type={type}
+                {...input}
+            />
+            {(errorMessage &&  <span className={styles.ErrorMessage}>{errorMessage}</span>)}
+
+        </>
+
     )
 }

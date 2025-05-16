@@ -3,7 +3,7 @@ import styles from './Nav.module.css'
 import { NavLink } from "react-router-dom";
 
 function Nav(props) {
-  const activeClass = ({ isActive }) => (isActive ? styles.active : styles.item)
+  const activeClass = ({ isActive }) => (isActive ? styles.active : '')
 
   const [activePanel, setActivePanel] = useState(false)
 
@@ -12,15 +12,17 @@ function Nav(props) {
   }
 
   return (
-    <nav className={`${styles.nav} ${(props.activePanel) ? styles.unVisibule : ''}`}>
+    <nav className={`${styles.nav} ${(activePanel) ? styles.unVisibule : ''}`}>
       <ul>
-        <NavLink to='/profile' className={activeClass}>Profile</NavLink>
-        <NavLink to='/dialogs' className={activeClass}>Messages</NavLink>
-        <NavLink to='/users' className={activeClass}>Users</NavLink>
-        <NavLink to='/music' className={activeClass}>Music</NavLink>
-        <NavLink to='/settings' className={activeClass} activeClassName={styles.active}>Settings</NavLink>
+        <NavLink to='/profile' className={`${styles.item} ${activeClass}`}>Profile</NavLink>
+        <NavLink to='/dialogs' className={`${styles.item} ${activeClass}`}>Messages</NavLink>
+        <NavLink to='/users' className={`${styles.item} ${activeClass}`}>Users</NavLink>
+        <NavLink to='/music' className={`${styles.item} ${activeClass}`}>Music</NavLink>
+        <NavLink to='/settings' className={`${styles.item} ${activeClass}`} activeClassName={styles.active}>Settings</NavLink>
       </ul>
-      <span className={`${styles.activePanelBtn} ${(activePanel) ? styles.activeBtn : ''}`} onClick={handleActivePanel}>&lt;</span>
+      <div onClick={handleActivePanel} className={`${styles.activePanelBtn} ${(activePanel) ? styles.activeBtn : ''}`}>
+        <span className={styles.panerArrow} >&lt;</span>
+      </div>
     </nav>
   )
 }
