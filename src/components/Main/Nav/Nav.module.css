@@ -5,7 +5,7 @@
     background-color: #2b2b2b;
     transition: margin 1s ease;
     position: sticky;
-    top: 15%;
+    top: 0;
     height: 100%;
     z-index: 9;
     border-radius: 40px 40px ;
@@ -15,7 +15,7 @@
 }
 
 .activePanelBtn {
-    right: 50%;
+    right: calc(50% - 10px);
     bottom: -5rem;
     position: absolute;
     width: 10px;

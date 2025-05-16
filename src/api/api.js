@@ -31,7 +31,6 @@ export const usersAPI = {
         )
     }
 }
-
 export const authAPI = {
     getAuthUser() {
         return (
@@ -57,6 +56,9 @@ export const authAPI = {
 }
 export const profileAPI = {
     getUserProfile(userId) {
+        if(!userId) {
+            return
+        }
         return (
             inctance
                 .get(`profile/${userId}`)
@@ -64,9 +66,26 @@ export const profileAPI = {
         )
     },
     putProfileData(data) {
+        const valideteDAta = {
+            AboutMe: data.aboutMe,
+            userId: data.userId,
+            lookingForAJob:  data.lookingForAJob,
+            lookingForAJobDescription:  data.lookingForAJobDescription,
+            fullName:  data.fullName,
+            contacts: {
+                github: data.contacts.github,
+                vk: data.contacts.vk,
+                facebook: data.contacts.facebook,
+                instagram: data.contacts.instagram,
+                twitter: data.contacts.twitter,
+                website: data.contacts.website,
+                youtube: data.contacts.youtube,
+                mainLink: data.contacts.mainLink,
+            },
+        }
       return (
         inctance
-            .put('profile', data)
+            .put('profile', valideteDAta)
             .then(responce => responce.data)
       )
     },
@@ -85,6 +104,7 @@ export const profileAPI = {
         )
     },
     addAvatar(avatar) {
+        debugger
         const formData = new FormData()
         formData.append('Image', avatar)
         return (

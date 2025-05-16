@@ -2,35 +2,23 @@ import styles from './Profile.module.css'
 import MainDesc from './MainDesc/MainDesc';
 import MyPosts from "./MyPosts/MyPosts";
 import Preloader from "../../Preloader/Preloader";
-import { AddPostForm } from './Addpost/Addpost';
+import {AddPostForm} from './Addpost/Addpost';
+import MainDescContainer from "./MainDesc/MainDescContainer";
+
 function Profile(props) {
     if (props.profile) {
         return (
             <main className={styles.main}>
-                {
-                    (props.putFetching) ?
-                        <Preloader /> :
-                        <MainDesc
-                            profile={props.profile}
-                            urlCurrnet={props.urlCurrnet}
-                            profileStatus={props.profileStatus}
-                            updateStatus={props.updateStatus}
-                            isMe={props.isMe}
-                            updateAvatar={props.updateAvatar}
-                            updateAvaIsFetching={props.updateAvaIsFetching}
-                            handlePutUserData={props.handlePutUserData}
-                        />
+                {(props.putFetching) ? <Preloader/> : <MainDescContainer />}
+                {(props.isMe)
+                    ?
+                    <AddPostForm
+                        isMe={props.isMe}
+                        onAddPost={props.onAddPost}
+                    />
+                    :
+                    <div className={styles.usersPosts}>Посты пользователя: </div>
                 }
-
-                {
-                    (props.isMe)
-                        ? <AddPostForm
-                            isMe={props.isMe}
-                            onAddPost={props.onAddPost}
-                        />
-                        : <div>Посты пользователя: </div>
-                }
-
                 <MyPosts
                     profile={props.profile}
                     posts={props.posts}
@@ -38,7 +26,7 @@ function Profile(props) {
             </main>
         )
     } else {
-        return <Preloader />
+        return <Preloader/>
     }
 }
 

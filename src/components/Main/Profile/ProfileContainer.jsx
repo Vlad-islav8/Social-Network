@@ -1,19 +1,12 @@
 import { connect } from 'react-redux';
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Profile from './Profile';
-import {
-	addAvatarThuckCreator,
-	getStatusThunkCreator,
-	getUserProfileThunkCreator,
-	onAddPost,
-	putProfileDataThuncCreator,
-	updateStatusThuncCreator,
-} from "../../../redux/profileReducer";
+import {getStatusThunkCreator, getUserProfileThunkCreator, onAddPost} from "../../../redux/profileReducer";
 import { withAuthRedirect } from "../../../Hok/withAuthRedirect";
 import { withRouter } from "../../../Hok/withRouter";
 import { compose } from "redux";
 import { isMe } from "../../../Hok/isMe";
-import { getPosts, getProfile, getProfileStatus, getPutFetching, getUpdateAvaIsFetching } from '../../../redux/selectors/profileSelector';
+import { getPosts, getProfile, getPutFetching } from '../../../redux/selectors/profileSelector';
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {
@@ -27,20 +20,6 @@ const ProfileContainer = (props) => {
 		}
 	}, [props.params.userId, props.meId])
 
-
-	const updateStatus = useCallback((newStaus) => {
-		props.updateStatusThuncCreator(newStaus)
-	}, [props.profileStatus])
-
-	const updateAvatar = async (avatar) => {
-		await props.addAvatarThuckCreator(avatar)
-		props.getUserProfileThunkCreator(userId)
-	}
-	const handlePutUserData = async (data) => {
-		await props.putProfileDataThuncCreator(data)
-		props.getUserProfileThunkCreator(userId)
-	}
-
 	return (
 		<Profile
 			isMe={props.isMe}
@@ -48,10 +27,7 @@ const ProfileContainer = (props) => {
 			onAddPost={props.onAddPost}
 			setUrlCurrent={props.setUrlCurrent}
 			profileStatus={props.profileStatus}
-			updateStatus={updateStatus}
-			updateAvatar={updateAvatar}
 			updateAvaIsFetching={props.updateAvaIsFetching}
-			handlePutUserData={handlePutUserData}
 			putFetching={props.putFetching}
 		/>
 	)
@@ -61,21 +37,15 @@ const mapStateToProps = (state) => {
 	return {
 		profile: getProfile(state),
 		posts: getPosts(state),
-		profileStatus: getProfileStatus(state),
 		meId: getMeId(state),
-		updateAvaIsFetching: getUpdateAvaIsFetching(state),
-		putFetching: getPutFetching(state)
+		putFetching: getPutFetching(state),
 	}
 }
 
 const mapDispatchToProps = {
 	onAddPost,
 	getUserProfileThunkCreator,
-	getStatusThunkCreator,
-	updateStatusThuncCreator,
-	addAvatarThuckCreator,
-	putProfileDataThuncCreator,
-	
+	getStatusThunkCreator
 }
 
 export default compose(

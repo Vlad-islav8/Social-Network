@@ -18,7 +18,6 @@ let initialState = {
     AboutMe: 'Статус отсутсвует',
     error: null,
     putFetching: false,
-
 }
 
 const profileReducer = createSlice({
@@ -37,6 +36,7 @@ const profileReducer = createSlice({
             });
         },
         setUsersProfile(state, action) {
+            debugger
             state.profile = action.payload
         },
         setProfileStatus(state, action) {
@@ -54,46 +54,50 @@ const profileReducer = createSlice({
         },
         setPutFetching(state, action) {
             state.putFetching = action.payload
-        }
+        },
+
     }
 })
 
-export const {onAddPost, setUsersProfile, setProfileStatus, setProfilePhoto, setUpdateAvaISFetching, setPutFetching} = profileReducer.actions
+export const {
+    onAddPost,
+    setUsersProfile,
+    setProfileStatus,
+    setProfilePhoto,
+    setUpdateAvaISFetching,
+    setPutFetching,
+} = profileReducer.actions
 export default profileReducer.reducer
 
 export const putProfileDataThuncCreator = (data) => {
+    console.trace()
     return async (dispatch) => {
-        dispatch(setPutFetching(true))
-        const responce = await profileAPI.putProfileData(data)
-        if(responce.resultCode === 0) {
-            dispatch(setPutFetching(false))
+        try {
+            dispatch(setPutFetching(true));
+            const response = await profileAPI.putProfileData(data);
+            return response
+        }  finally {
+            dispatch(setPutFetching(false));
         }
-    }
-}
-
+    };
+};
 export const addAvatarThuckCreator = (avatar) => {
     return async (dispatch) => {
         dispatch(setUpdateAvaISFetching(true))
         const responce = await profileAPI.addAvatar(avatar)
-        if(responce.resultCode === 0) {
             dispatch(setProfilePhoto(responce))
             dispatch(setUpdateAvaISFetching(false))
-        }
     }
 }
 
 export const getUserProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         const responce = await profileAPI.getUserProfile(userId)
+        if(responce) {
+            debugger
             dispatch(setUsersProfile(responce))
             dispatch(setProfilePhoto(responce.photos))
-    }
-}
-
-export const getUserProfileThunkCreatorу = (userId) => {
-    return async (dispatch) => {
-        const getProfileResponce = await profileAPI.getUserProfile(userId)
-        dispatch(setUsersProfile(getProfileResponce))
+        }
     }
 }
 
