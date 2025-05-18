@@ -20,14 +20,15 @@ export const BazeInput = ({input, meta, placeholder, type, errorMessage}) => {
         </div>
     )
 }
-
 export const BazeTextArea = ({input, meta, placeholder, type}) => {
     const error = meta.touched && meta.error
     return (
         <div className={`${styles.BazeInput}`}>
             <textarea placeholder={placeholder} type={type} {...input} className={`${(meta.touched && meta.error) ? styles.Error : undefined}`}/>
-            { onErrorMessage(error, meta) }
+            { onErrorMessage(error, meta) }sfd
         </div>
+
+
     )
 }
 

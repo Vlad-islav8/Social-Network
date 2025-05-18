@@ -1,18 +1,21 @@
-import Login from "./Login";
+import LoginReduxForm from "./Login";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {isMe} from "../../../Hok/isMe";
 import {loginUserThuncCreator} from "../../../redux/authReducer";
 import Preloader from "../../Preloader/Preloader";
+import {reduxForm} from "redux-form";
+import {useNavigate} from "react-router-dom";
 
 const LoginContainer = (props) => {
+    const redirect = useNavigate()
     if (props.isLoading) {
         return <Preloader/>
     } else if (props.isAuth) {
-        return <div>Вы вошли в аккаунт</div>
+        redirect('/')
     }
     return (
-        <Login {...props}/>
+        <LoginReduxForm {...props}/>
     )
 }
 const mapStateToProps = (state) => {
@@ -28,5 +31,8 @@ const mapDispatchToProps = {
 }
 export default compose(
     isMe,
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps),
+    reduxForm({
+        form: 'login'
+    })
 )(LoginContainer)

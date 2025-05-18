@@ -1,72 +1,157 @@
-@import url("https://fonts.googleapis.com/css?family=Bevan");
-
-.body {
-  background: rgb(40,40,40);
-  overflow: hidden;
-  height: 100%;
-}
-
-.p {
-  font-family: "Bevan", cursive;
-  font-size: 130px;
-  margin: 10vh 0 0;
-  text-align: center;
-  letter-spacing: 5px;
+.pageNotFoundWrapper {
   background-color: black;
-  color: transparent;
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.1);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
+  min-height: 90vh;
+  overflow: hidden;
+  max-width: 100%;
+}
 
-  span {
-    font-size: 1.2em;
+.pageNotFound {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.okakInfo {
+  margin: 1rem;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2b2b2b;
+  padding: 2rem;
+  position: relative;
+  animation: loadimgInfo 1s ease-out;
+}
+
+.okakInfo h1 {
+  text-transform: uppercase;
+  color: white;
+  font-size: 5.5rem;
+  line-height: 100px;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  z-index: 2;
+}
+
+.okakInfo h2 {
+  font-size: 2rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+  color: white;
+  z-index: 2;
+}
+
+.errorCode {
+  position: absolute;
+  font-size: 20rem;
+  opacity: 0.1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  z-index: 1;
+  color: white;
+}
+
+.homeBtnContainer {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 2;
+}
+
+.homeBtn {
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.homeBtn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.homeBtn a {
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.okakImageBlock {
+  height: 90vh;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loadimgImage 1s ease-out;
+}
+
+.okakImageBlock img {
+  height: 100%;
+  max-width: 100%;
+}
+
+@keyframes loadimgInfo {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
-.code {
-  color: #bdbdbd;
-  text-align: center;
-  display: block;
-  font-size: 16px;
-  margin: 0 30px 25px;
-
-  span {
-    color: #f0c674;
+@keyframes loadimgImage {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
   }
-
-  i {
-    color: #b5bd68;
-  }
-
-  em {
-    color: #b294bb;
-    font-style: unset;
-  }
-
-  b {
-    color: #81a2be;
-    font-weight: 500;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .pageNotFound {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
 
-.a {
-  color: #8abeb7;
-  font-family: monospace;
-  font-size: 20px;
-  text-decoration: underline;
-  margin-top:10px;
-  display:inline-block;
-  text-align: center;
-}
+  .okakInfo {
+    padding: 1.5rem;
+  }
 
-.center {
-    text-align: center;
-}
+  .okakInfo h1 {
+    font-size: 3rem;
+    line-height: 70px;
+  }
 
-@media screen and (max-width: 880px) {
-  .p {
-    font-size: 14vw;
+  .okakInfo h2 {
+    font-size: 1.5rem;
+  }
+
+  .errorCode {
+    font-size: 15rem;
+    top: 40%;
+  }
+
+  .homeBtn {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .okakImageBlock {
+    padding: 0;
+  }
+
+  .okakImageBlock img {
+    max-height: 300px;
   }
 }

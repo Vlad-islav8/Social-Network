@@ -43,7 +43,7 @@ const MainInfo = (props) => {
                     </div>
                 </div>
 
-                {(isMe &&
+                {(isMe) ?
                     <div className={styles.editBtnWrapper}>
                         <div className={styles.editProfile}>
                             <button onClick={handleEditMode} title='редактировать профиль'>
@@ -61,12 +61,20 @@ const MainInfo = (props) => {
                                 handleUpdateAvatar={handleUpdateAvatar}
                                 submitData={props.submitData}
                             />
-
+                        </div>
+                    </div> :
+                    <div className={styles.editBtnWrapper}>
+                        <div className={styles.editProfile}>
+                            <button onClick={handleEditMode} title='редактировать профиль'>
+                                Подписаться
+                            </button>
 
                         </div>
                     </div>
+                }
 
-                )}
+
+
             </div>
         </div>
     )

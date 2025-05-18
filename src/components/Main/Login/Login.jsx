@@ -1,60 +1,78 @@
 import styles from './Login.module.css'
-import { Field, reduxForm } from 'redux-form';
-import {email } from "redux-form-validators";
+import {Field,} from 'redux-form';
+import {email} from "redux-form-validators";
 import {BazeInput} from "../../FormComponents/inputs/Inputs";
 import {password, requiredInput} from "../../../utils/validators/validators";
-import { useState } from 'react';
+import {useState} from 'react';
+import loginSmile from '../../../images/loginSmile.png'
+import showPass from '../../../images/showPass.svg'
+import unShowPass from '../../../images/unShowPass.svg'
+import handle from '../../../utils/hadnle'
 
-const LoginForm = (props) => {
+const LoginReduxForm = (props) => {
+    const [checkBox, setCheckBox] = useState(false)
+
+    const handleCheckBox = () => {
+        handle(checkBox, setCheckBox)
+    }
     const submit = ({email, password, rememberMe}) => {
-        props.loginUserThuncCreator(email, password, rememberMe)
+        props.loginUserThuncCreator(email, password, checkBox)
     }
     const [typeState, setTypeState] = useState('password')
-    const isHidden = (typeState === 'password') 
+    const isHidden = (typeState === 'password')
 
     const handlePasswort = () => {
         isHidden ? setTypeState('text') : setTypeState('password')
     }
     return (
-        <form className={styles.loginForm} onSubmit={props.handleSubmit(submit)}>
+        <div className={styles.loginWrapper}>
             <div className={styles.loginFormContainer}>
-                <div className={styles.loginName}>
-                    <label>Почта</label>
-                    <Field name='email' type="text" placeholder="Введите почту" errorMessage={props.errorMessage} component={BazeInput} validate={[requiredInput, email()]}/>
+                <div className={styles.loginHeader}>
+                    <h1 >Войдите в аккаунт</h1>
                 </div>
-                <div className={styles.loginPassword}>
-                    <label>Пароль</label>
-                    <Field name='password' type={typeState} placeholder="Введите пароль" errorMessage={props.errorMessage} component={BazeInput} validate={[requiredInput, password]}/>
-                    <button type='button' onClick={handlePasswort}>
-                        {(isHidden) ? 'Показать пароль' : 'Скрыть пароль'}
-                    </button>
-                </div>
-                <div className={styles.loginOut}>
-                    <div className={styles.loginRememberMe}>
-                        <Field name='rememberMe' type="checkbox" id="remember" component={BazeInput}/>
-                        <label htmlFor="remember">Запомнить меня</label>
+                <form className={styles.loginForm} onSubmit={props.handleSubmit(submit)}>
+                    <div className={styles.loginName}>
+                        <label className={styles.label}>Почта</label>
+                        <Field name='email'
+                               type="text"
+                               placeholder="Введите почту"
+                               errorMessage={props.errorMessage}
+                               component={BazeInput} validate={[requiredInput, email()]}/>
                     </div>
-                    <div className={styles.outBtn}>
-                        <button type="submit">Войти</button>
+                    <div className={styles.loginPassword}>
+                        <label className={styles.label}>Пароль</label>
+                        <Field name='password' type={typeState} placeholder="Введите пароль"
+                               errorMessage={props.errorMessage} component={BazeInput}
+                               validate={[requiredInput, password]}/>
+                        <button type='button' onClick={handlePasswort}>
+                            {(isHidden)
+                                ?
+                                <img src={showPass} alt="Показать" className={styles.showPass}/>
+                                :
+                                <img src={unShowPass} alt="скрыть" className={styles.showPass}/>
+
+                            }
+                        </button>
                     </div>
-                </div>
+                    <div className={styles.loginOut}>
+                        <div className={styles.loginRememberMe}>
+                            <label className={styles.label} htmlFor="remember">Запомнить меня</label>
+                            <button onClick={handleCheckBox} type='button'>
+                                <div className={`${styles.checkBox} ${(checkBox && styles.checkBoxActive)}`}>
+                                    <span className={`${styles.checkBoxKvadratik} ${(checkBox && styles.checkBoxKvadratikActive)}`} ></span>
+                                </div>
+                            </button>
+                        </div>
+                        <div className={styles.outBtn}>
+                            <button type="submit">Войти</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    )
-}
-
-
-const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm)
-
-const Login = (props) => {
-    return (
-        <div className={styles.loginBlock}>
-            <h1 className={styles.loginHeader}>Войдите в аккаунт</h1>
-            <LoginReduxForm loginUserThuncCreator={props.loginUserThuncCreator} errorMessage={props.errorMessage}/>
+            <div className={styles.loginSmileContainer}>
+                <img src={loginSmile} alt=""/>
+            </div>
         </div>
     )
 }
-
-export default Login
+export default  LoginReduxForm

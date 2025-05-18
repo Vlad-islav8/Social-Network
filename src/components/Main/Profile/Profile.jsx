@@ -10,19 +10,22 @@ function Profile(props) {
         return (
             <main className={styles.main}>
                 {(props.putFetching) ? <Preloader/> : <MainDescContainer />}
-                {(props.isMe)
-                    ?
-                    <AddPostForm
-                        isMe={props.isMe}
-                        onAddPost={props.onAddPost}
+                <div className={styles.posts}>
+                    {(props.isMe)
+                        ?
+                        <AddPostForm
+                            isMe={props.isMe}
+                            onAddPost={props.onAddPost}
+                        />
+                        :
+                        <div className={styles.usersPosts}>Посты пользователя: </div>
+                    }
+                    <MyPosts
+                        profile={props.profile}
+                        posts={props.posts}
                     />
-                    :
-                    <div className={styles.usersPosts}>Посты пользователя: </div>
-                }
-                <MyPosts
-                    profile={props.profile}
-                    posts={props.posts}
-                />
+                </div>
+
             </main>
         )
     } else {
