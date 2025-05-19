@@ -12,7 +12,6 @@ import Preloader from "../../Preloader/Preloader";
 const UserContainer = (props) => {
     useEffect(() => {
         props.getUsersThunkCreator(props.currenPages, props.usersPages)
-
     }, [props.currenPages, props.usersPages])
 
     const onPageChanged = (el) => {

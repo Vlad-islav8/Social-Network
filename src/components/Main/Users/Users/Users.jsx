@@ -29,7 +29,6 @@ function Users(props) {
                                             : el.photos.small} alt="Аватар"
                                     />
                                 </Link>
-
                             </div>
                             <div className={styles.moreInfoBlock}>
                                 <div className={styles.userInfo}>

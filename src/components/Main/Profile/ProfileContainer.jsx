@@ -6,7 +6,7 @@ import { withAuthRedirect } from "../../../Hok/withAuthRedirect";
 import { withRouter } from "../../../Hok/withRouter";
 import { compose } from "redux";
 import { isMe } from "../../../Hok/isMe";
-import { getPosts, getProfile, getPutFetching } from '../../../redux/selectors/profileSelector';
+import {getIsFollowered, getPosts, getProfile, getPutFetching} from '../../../redux/selectors/profileSelector';
 import { getMeId } from '../../../redux/selectors/isAuthSelector';
 
 const ProfileContainer = (props) => {

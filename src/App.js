@@ -1,5 +1,5 @@
 import './App.css';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from './components/Main/Nav/Nav';
 import ProfileContainer from './components/Main/Profile/ProfileContainer';
@@ -11,7 +11,6 @@ import { appInitializeThunkCreator } from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
 import { getInitialize } from './redux/selectors/appSelector';
 import { getIsAuth } from './redux/selectors/isAuthSelector';
-
 const Music = lazy(() => import('./components/Main/Music/Music'))
 const Settings = lazy(() => import('./components/Main/Settings/Settings'))
 const DialogsContainer = lazy(() => import('./components/Main/Dialogs/DialogsContainer'))
@@ -21,6 +20,8 @@ const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
 function App(props) {
 
+    const [mouseY, setMouseY] = useState(null)
+    const [mouseX, setMouseX] = useState(null)
     useEffect(() => {
         props.appInitializeThunkCreator()
     }, [props.appInitializeThunkCreator])
@@ -28,10 +29,14 @@ function App(props) {
     if (!props.initialize || props.isAuth === undefined) {
         return <Preloader />
     }
+    const hadnleMouseMove = (event) => {
+        setMouseY(event.clientY)
+        setMouseX(event.clientX)
+    }
 
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <div className='wrapper'>
+            <div className='wrapper' onMouseMove={hadnleMouseMove}>
                 <div className='appContainer'>
                     <HeaderContainer />
                     <div className='mainContainer'>
@@ -76,6 +81,7 @@ function App(props) {
                         </div>
                     </div>
                 </div>
+                {/*<CursorShadow mouseY={mouseY} mouseX={mouseX} />*/}
             </div>
         </BrowserRouter>
     );

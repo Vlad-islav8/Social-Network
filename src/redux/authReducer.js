@@ -9,6 +9,7 @@ let initialState = {
     userData: null,
     errorMessage: null,
     isLoading: false,
+    capchaUrl: null
 }
 
 const authReducer = createSlice({
@@ -39,6 +40,9 @@ const authReducer = createSlice({
         setIsAuth(state, action) {
             state.isAuth = action.payload
         },
+        setCapchaUrl(state, action) {
+            state.capchaUrl = action.payload
+        }
     }
 })
 
@@ -49,9 +53,16 @@ export const {
     setUserProfileData, 
     deleteUserProfileData, 
     setLoadingStatus, 
-    setIsAuth
+    setIsAuth,
+    setCapchaUrl,
 } = authReducer.actions
 
+export const getCapchaUrlThunkCreator = () => {
+    return async (dispatch) => {
+        const responce = await authAPI.capcha()
+        dispatch(setCapchaUrl(responce))
+    }
+}
 export const getAuthUserThunkCreator = () => {
     return async (dispatch) => {
         const response = await authAPI.getAuthUser()
@@ -65,11 +76,12 @@ export const getAuthUserThunkCreator = () => {
         }
     }
 }
-export const loginUserThuncCreator = (email, password, rememberMe = false) => {
+export const loginUserThuncCreator = (email, password, rememberMe = false, capcha) => {
     return async (dispatch) => {
         try {
             dispatch(setLoadingStatus(true))
-            const loginUserResponce = await authAPI.loginUser(email, password, rememberMe)
+            const loginUserResponce = await authAPI.loginUser(email, password, rememberMe, capcha)
+            debugger
             dispatch(setLoadingStatus(false))
             if (loginUserResponce.data.resultCode === 0) {
                 debugger
@@ -83,7 +95,6 @@ export const loginUserThuncCreator = (email, password, rememberMe = false) => {
         }
     }
 }
-
 export const loginOutUserThuncCreator = () => {
     return async (dispatch) => {
         const logoutUserResponce = await authAPI.logoutUser()

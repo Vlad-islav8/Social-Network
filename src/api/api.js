@@ -39,10 +39,10 @@ export const authAPI = {
                 .then(response => response.data)
         )
     },
-    loginUser(email, password, rememberMe) {
+    loginUser(email, password, rememberMe, captcha) {
         return (
             inctance
-                .post('auth/login', {email, password, rememberMe})
+                .post('auth/login', {email, password, rememberMe, captcha: false})
                 .then(response => response)
         )
     },
@@ -50,6 +50,13 @@ export const authAPI = {
         return (
             inctance
                 .delete('auth/login',)
+                .then(response => response.data)
+        )
+    },
+    capcha() {
+        return (
+            inctance
+                .get('/security/get-captcha-url')
                 .then(response => response.data)
         )
     }
@@ -104,13 +111,19 @@ export const profileAPI = {
         )
     },
     addAvatar(avatar) {
-        debugger
         const formData = new FormData()
         formData.append('Image', avatar)
         return (
             inctance
                 .put('profile/photo', formData)
                 .then(response => response.data)
+        )
+    },
+    getFollowUser(userId) {
+        return (
+            inctance
+                .get(`follow/${userId}`)
+                .then(responce => responce.data)
         )
     }
 }

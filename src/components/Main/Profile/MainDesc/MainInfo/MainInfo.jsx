@@ -6,10 +6,13 @@ import EditProfileReduxForm from "./EditProfile/EditProfile";
 import headerDefaultImage from '../../../../../images/headerDefaultImage.jpeg'
 import {useState} from "react";
 const MainInfo = (props) => {
+    const userId = props.profileId
     const profile = props.profile.profile
     const largePhoto = profile?.photos?.large
     const small = profile?.photos?.small
     const isMe = props.isMe
+    const isFollowered = props.isFollowered
+    const followAction = (isFollowered) ? 'unFollow' : 'follow'
     const [editMode, setEditMode] = useState(false)
     const handleUpdateAvatar = (avatar) => {
         props.updateAvatar(avatar)
@@ -18,7 +21,9 @@ const MainInfo = (props) => {
     const handleEditMode = () => {
         (editMode) ? setEditMode(false) : setEditMode(true)
     }
-
+    const handleFollow = () => {
+        props.handleFollowered(userId, followAction)
+    }
     return (
         <div className={styles.mainInfo}>
             <div className={styles.headerProfile}>
@@ -65,8 +70,11 @@ const MainInfo = (props) => {
                     </div> :
                     <div className={styles.editBtnWrapper}>
                         <div className={styles.editProfile}>
-                            <button onClick={handleEditMode} title='редактировать профиль'>
-                                Подписаться
+                            <button onClick={handleFollow}>
+                                {(isFollowered) ?
+                                    'Отписаться' :
+                                    'Подписаться'
+                                }
                             </button>
 
                         </div>

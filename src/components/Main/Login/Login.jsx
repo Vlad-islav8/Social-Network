@@ -15,14 +15,17 @@ const LoginReduxForm = (props) => {
     const handleCheckBox = () => {
         handle(checkBox, setCheckBox)
     }
-    const submit = ({email, password, rememberMe}) => {
-        props.loginUserThuncCreator(email, password, checkBox)
+    const submit = ({email, password, capcha}) => {
+        props.loginUserThuncCreator(email, password, checkBox, capcha)
     }
     const [typeState, setTypeState] = useState('password')
     const isHidden = (typeState === 'password')
 
     const handlePasswort = () => {
         isHidden ? setTypeState('text') : setTypeState('password')
+    }
+    const handleBotSistem = () => {
+        props.getCapcha()
     }
     return (
         <div className={styles.loginWrapper}>
@@ -53,6 +56,19 @@ const LoginReduxForm = (props) => {
 
                             }
                         </button>
+                    </div>
+                    <div className={styles.capcha}>
+                        <label htmlFor="">Для входа подтвердите что вы не робот</label>
+                        <button onClick={handleBotSistem} type='button'>Сгенерировать картину</button>
+
+                        {(props.capchaUrl &&
+                                <div>
+                                    <img src={props.capchaUrl.url} alt="капча"/>
+                                    <Field name='capcha' type='text' placeholder="Введите символы с картинки"
+                                           errorMessage={props.errorMessage} component={BazeInput}
+                                           validate={[requiredInput]}/>
+                                </div>
+                        )}
                     </div>
                     <div className={styles.loginOut}>
                         <div className={styles.loginRememberMe}>

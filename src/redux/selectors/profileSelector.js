@@ -31,3 +31,8 @@ export const getPutFetching = createSelector([getProfile],
         return profile.putFetching
     }
 )
+
+export const getIsFollowered = createSelector([getProfile],
+    (profile) => {
+        return profile.isFollowered
+    })

@@ -24,7 +24,6 @@ const AddContactModal = (props) => {
             contactObj
         )
     }
-    debugger
     return (
         <div className={`${styles.addContactModal} ${(props.addContactMode) ? styles.addContactModalActive : ''}`}
              onClick={isClickToForm}>

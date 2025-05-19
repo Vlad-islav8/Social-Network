@@ -9,11 +9,16 @@ import twitter from "../../../../images/twitter.svg";
 import website from "../../../../images/website.svg";
 import youtube from "../../../../images/youtube.svg";
 import mainLink from "../../../../images/mainLink.svg";
-import {getProfile, getProfileStatus, getUpdateAvaIsFetching} from "../../../../redux/selectors/profileSelector";
+import {
+    getIsFollowered,
+    getProfile,
+    getProfileStatus,
+    getUpdateAvaIsFetching
+} from "../../../../redux/selectors/profileSelector";
 import {isMe} from "../../../../Hok/isMe";
 import {useCallback} from "react";
 import {
-    addAvatarThuckCreator,
+    addAvatarThuckCreator, followUserThunkCreator,
     getUserProfileThunkCreator, putProfileDataThuncCreator,
     updateStatusThuncCreator
 } from "../../../../redux/profileReducer";
@@ -23,7 +28,6 @@ const MainDescContainer = (props) => {
     const userId = props.meId
     const profile = props.profile.profile
     const contacts = profile.contacts
-
     const imageArr = [
         {name: 'facebook', link: facebook},
         {name: 'website', link: website},
@@ -37,14 +41,12 @@ const MainDescContainer = (props) => {
     const updateStatus = useCallback((newStaus) => {
         props.updateStatusThuncCreator(newStaus)
     }, [props.profileStatus])
-
     const updateAvatar = async (avatar) => {
         await props.addAvatarThuckCreator(avatar)
         props.getUserProfileThunkCreator(userId)
     }
     const handlePutUserData = async (data) => {
         const response = await props.putProfileDataThuncCreator(data)
-        debugger
         props.getUserProfileThunkCreator(userId)
     }
     const handleremoveLink =  (name) => {
@@ -70,6 +72,9 @@ const MainDescContainer = (props) => {
         }
         handlePutUserData(userData)
     }
+    const handleFollowered = (userId, followAction) => {
+        props.followUserThunkCreator(userId, followAction)
+    }
     return (
         <MainDesc
             imageArr={imageArr}
@@ -79,6 +84,8 @@ const MainDescContainer = (props) => {
             handlePutUserData={handlePutUserData}
             submitData={submitData}
             handleremoveLink={handleremoveLink}
+            isFollowered={props.isFollowered}
+            handleFollowered={handleFollowered}
         />
     )
 }
@@ -87,16 +94,17 @@ const mapStateToProps = (state) => {
         profile: getProfile(state),
         profileStatus: getProfileStatus(state),
         meId: getMeId(state),
-        updateAvaIsFetching: getUpdateAvaIsFetching(state)
+        updateAvaIsFetching: getUpdateAvaIsFetching(state),
+        isFollowered: getIsFollowered(state)
+
     }
 }
 const mapDispatchToProps =  {
-
         updateStatusThuncCreator,
         addAvatarThuckCreator,
         getUserProfileThunkCreator,
         putProfileDataThuncCreator,
-    
+        followUserThunkCreator,
 }
 
 export default compose(

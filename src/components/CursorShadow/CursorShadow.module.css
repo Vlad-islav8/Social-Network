@@ -1,0 +1,9 @@
+.showItem {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 999999;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+
+}

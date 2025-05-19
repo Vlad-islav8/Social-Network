@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { profileAPI } from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 let initialState = {
     posts: [
         {
@@ -18,6 +18,7 @@ let initialState = {
     AboutMe: 'Статус отсутсвует',
     error: null,
     putFetching: false,
+    isFollowered: null
 }
 
 const profileReducer = createSlice({
@@ -36,7 +37,6 @@ const profileReducer = createSlice({
             });
         },
         setUsersProfile(state, action) {
-            debugger
             state.profile = action.payload
         },
         setProfileStatus(state, action) {
@@ -55,6 +55,9 @@ const profileReducer = createSlice({
         setPutFetching(state, action) {
             state.putFetching = action.payload
         },
+        setToogleFollow(state, action) {
+            state.isFollowered = action.payload
+        }
 
     }
 })
@@ -66,11 +69,26 @@ export const {
     setProfilePhoto,
     setUpdateAvaISFetching,
     setPutFetching,
+    setToogleFollow,
 } = profileReducer.actions
 export default profileReducer.reducer
 
+export const followUserThunkCreator = (userId, followAction) => {
+    return async (dispatch) => {
+        if(followAction === "follow") {
+            const responce = await usersAPI.followUser(userId)
+            if(responce.resultCode === 0) {
+                dispatch(setToogleFollow(true))
+            }
+        } else if(followAction === 'unFollow') {
+            const responce = await usersAPI.unFollowUser(userId)
+            if(responce.resultCode === 0) {
+                dispatch(setToogleFollow(false))
+            }
+        }
+    }
+}
 export const putProfileDataThuncCreator = (data) => {
-    console.trace()
     return async (dispatch) => {
         try {
             dispatch(setPutFetching(true));
@@ -89,25 +107,23 @@ export const addAvatarThuckCreator = (avatar) => {
             dispatch(setUpdateAvaISFetching(false))
     }
 }
-
 export const getUserProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         const responce = await profileAPI.getUserProfile(userId)
+        const followResponce = await profileAPI.getFollowUser(userId)
         if(responce) {
-            debugger
             dispatch(setUsersProfile(responce))
             dispatch(setProfilePhoto(responce.photos))
         }
+        dispatch(setToogleFollow(followResponce))
     }
 }
-
 export const getStatusThunkCreator = (userId) => {
     return async (dispatch) => {
         const profileStatusResponce = await profileAPI.getProfileStatus(userId)
         dispatch(setProfileStatus(profileStatusResponce))
     }
 }
-
 export const updateStatusThuncCreator = (status) => {
     return async (dispatch) => {
         const updateProfileStatusResponce = await profileAPI.updateProfileStatus(status)
