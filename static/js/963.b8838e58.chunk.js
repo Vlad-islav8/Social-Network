@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksocial_network=self.webpackChunksocial_network||[]).push([[963],{7963:(s,e,n)=>{n.r(e),n.d(e,{default:()=>i});n(5043);const t="Settings_settings__yMgEl";var c=n(579);const i=function(){return(0,c.jsx)("div",{children:(0,c.jsx)("h1",{className:t,children:"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438"})})}}}]);
+//# sourceMappingURL=963.b8838e58.chunk.js.map
