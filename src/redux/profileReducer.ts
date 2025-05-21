@@ -1,6 +1,48 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import {profileAPI, usersAPI} from "../api/api";
-let initialState = {
+export type postsType  = {
+    id: number,
+    title: string,
+    text: string,
+    url: string,
+    likesCount: number,
+    comments: number,
+    name: string,
+}
+export type photosType = {
+    small: string,
+    large: string
+}
+export type profileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: photosType
+
+}
+type initialStateType = {
+    posts: postsType[]
+    profile: profileType,
+    profileStatus: string | null,
+    updateAvaIsFetching: boolean,
+    AboutMe: string,
+    error: string,
+    putFetching: boolean,
+    isFollowered: boolean | null
+}
+
+let initialState: initialStateType = {
     posts: [
         {
             id: 0,
@@ -21,41 +63,48 @@ let initialState = {
     isFollowered: null
 }
 
+
 const profileReducer = createSlice({
     name: 'profileReducer',
     initialState,
     reducers: {
-        onAddPost(state, action) {
-            state.posts.push({ 
-                id: nanoid(), 
-                title: '',
-                text: action.payload,
-                url: 'https://i.pinimg.com/originals/56/c7/5d/56c75d13636b5830b34385f6df90ca43.jpg',
-                likesCount: 0,
-                comments: 0,
-                name: state.profile ? state.profile.fullName : 'Автор'
-            });
+        onAddPost(state, action: PayloadAction<string>) {
+            const newPost: postsType = {
+                    id: Number(nanoid()),
+                    title: '',
+                    text: action.payload,
+                    url: 'https://i.pinimg.com/originals/56/c7/5d/56c75d13636b5830b34385f6df90ca43.jpg',
+                    likesCount: 0,
+                    comments: 0,
+                    name: state.profile ? state.profile.fullName : 'Автор'
+            }
+            state.posts.push(newPost)
+
         },
-        setUsersProfile(state, action) {
+        setUsersProfile(state, action: PayloadAction<profileType> ) {
             state.profile = action.payload
         },
-        setProfileStatus(state, action) {
+        setProfileStatus(state, action: PayloadAction<string>) {
             state.profileStatus = action.payload
         },
-        setProfilePhoto(state, action) {
+        setProfilePhoto(state, action: PayloadAction<photosType>) {
             const small = action.payload.small
             const large = action.payload.large
             if(state.profile) {
-                state.profile.photos.small = small
+                if(small) {
+                    state.profile.photos.small = small
+                } else if(large) {
+                    state.profile.photos.large = large
+                }
             }
         },
-        setUpdateAvaISFetching(state, action) {
+        setUpdateAvaISFetching(state, action: PayloadAction<boolean>) {
             state.updateAvaIsFetching = action.payload
         },
-        setPutFetching(state, action) {
+        setPutFetching(state, action: PayloadAction<boolean>) {
             state.putFetching = action.payload
         },
-        setToogleFollow(state, action) {
+        setToogleFollow(state, action: PayloadAction<boolean>) {
             state.isFollowered = action.payload
         }
 
@@ -73,8 +122,8 @@ export const {
 } = profileReducer.actions
 export default profileReducer.reducer
 
-export const followUserThunkCreator = (userId, followAction) => {
-    return async (dispatch) => {
+export const followUserThunkCreator = (userId:any, followAction:any) => {
+    return async (dispatch:any) => {
         if(followAction === "follow") {
             const responce = await usersAPI.followUser(userId)
             if(responce.resultCode === 0) {
@@ -88,8 +137,8 @@ export const followUserThunkCreator = (userId, followAction) => {
         }
     }
 }
-export const putProfileDataThuncCreator = (data) => {
-    return async (dispatch) => {
+export const putProfileDataThuncCreator = (data:any) => {
+    return async (dispatch:any) => {
         try {
             dispatch(setPutFetching(true));
             const response = await profileAPI.putProfileData(data);
@@ -99,16 +148,16 @@ export const putProfileDataThuncCreator = (data) => {
         }
     };
 };
-export const addAvatarThuckCreator = (avatar) => {
-    return async (dispatch) => {
+export const addAvatarThuckCreator = (avatar:any) => {
+    return async (dispatch:any) => {
         dispatch(setUpdateAvaISFetching(true))
         const responce = await profileAPI.addAvatar(avatar)
             dispatch(setProfilePhoto(responce))
             dispatch(setUpdateAvaISFetching(false))
     }
 }
-export const getUserProfileThunkCreator = (userId) => {
-    return async (dispatch) => {
+export const getUserProfileThunkCreator = (userId:any) => {
+    return async (dispatch:any) => {
         const responce = await profileAPI.getUserProfile(userId)
         const followResponce = await profileAPI.getFollowUser(userId)
         if(responce) {
@@ -118,14 +167,14 @@ export const getUserProfileThunkCreator = (userId) => {
         dispatch(setToogleFollow(followResponce))
     }
 }
-export const getStatusThunkCreator = (userId) => {
-    return async (dispatch) => {
+export const getStatusThunkCreator = (userId:any) => {
+    return async (dispatch:any) => {
         const profileStatusResponce = await profileAPI.getProfileStatus(userId)
         dispatch(setProfileStatus(profileStatusResponce))
     }
 }
-export const updateStatusThuncCreator = (status) => {
-    return async (dispatch) => {
+export const updateStatusThuncCreator = (status:any) => {
+    return async (dispatch:any) => {
         const updateProfileStatusResponce = await profileAPI.updateProfileStatus(status)
         dispatch(setProfileStatus(updateProfileStatusResponce))
     }

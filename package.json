@@ -39,6 +39,11 @@
     "redux-form-validators": "^3.3.2"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^6.3.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3"
   }
 }

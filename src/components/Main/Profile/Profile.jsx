@@ -1,5 +1,4 @@
 import styles from './Profile.module.css'
-import MainDesc from './MainDesc/MainDesc';
 import MyPosts from "./MyPosts/MyPosts";
 import Preloader from "../../Preloader/Preloader";
 import {AddPostForm} from './Addpost/Addpost';
