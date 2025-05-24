@@ -1,10 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { getAuthUserThunkCreator } from "./authReducer";
 
-type initialStateType = {
+interface initialStateType  {
     initialize: boolean
 }
-type thinkType = (dispatch:Function) => Promise<void>
+interface thinkType {(dispatch:Function): Promise<void>}
 let initialState:initialStateType = {
     initialize: false
 }

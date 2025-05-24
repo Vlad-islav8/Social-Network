@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { authAPI } from "../api/api";
 import {getUserProfileThunkCreator, } from "./profileReducer";
-type initialStateType = {
+interface initialStateType  {
     id: number | null,
     login: string | null,
     email: string | null,
@@ -10,28 +10,28 @@ type initialStateType = {
     isLoading: boolean,
     capchaUrl: string | null
 }
-type authType = {
+interface authType {
     login: string,
     email: string,
     id: number
 }
-type loginDataType = {
+interface loginDataType  {
     token: string
     userId: number
 }
-type loginType = {
+interface loginType {
     data: loginDataType
     fieldsErrors: []
     messages: []
     resultCode: number
 }
-type getUserType = {
+interface getUserType  {
     data: authType
     fieldsErrors: []
     messages: []
     resultCode: number
 }
-type thinkType  = (dispatch:Function) => Promise<void>
+interface thinkType {(dispatch:Function): Promise<void>}
 let initialState:initialStateType = {
     id: null,
     login: null,
