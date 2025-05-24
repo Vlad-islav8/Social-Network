@@ -2,7 +2,7 @@ import React from "react";
 import styles from './Users.module.css';
 import { Link } from "react-router-dom";
 import PageNavigate from "../PageNavigate/PageNavigate";
-
+import defaultAvaImage from  '../../../../images/defaultAvaImage.jpg'
 function Users(props) {
     const onHandleFollow = (userId, action) => {
         props.folowUserThuncCreator(userId, action)
@@ -24,8 +24,8 @@ function Users(props) {
                             <div className={styles.ava}>
                                 <Link to={`/profile/${el.id}`}>
                                     <img
-                                        src={(el.photos.small === null)
-                                            ? "https://justvision.org/sites/default/files/2019-11/ofer-shinar.png"
+                                        src={(!el.photos.small)
+                                            ? defaultAvaImage
                                             : el.photos.small} alt="Аватар"
                                     />
                                 </Link>

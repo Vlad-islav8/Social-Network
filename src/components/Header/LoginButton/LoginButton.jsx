@@ -13,7 +13,7 @@ const Pomogite = (props) => {
 
 export const LoginButton = (props) => {
     const [activeLoginBlock, setActiveLoginBlock] = useState(false)
-    const isLogin = props.isAuth && props.userData
+    const isLogin = props.isAuth && props.profile
     const handleActive = () => {
         (activeLoginBlock) ? setActiveLoginBlock(false) : setActiveLoginBlock(true)
     }
@@ -34,14 +34,14 @@ export const LoginButton = (props) => {
                         ?
                         <div className={styles.profileData}>
                             {
-                                (props.userData.photos.small) ?
+                                (props.profile.profile.photos.small) ?
                                     <Link to='/profile'>
-                                        <img src={props.userData.photos.small} className={styles.headerAvatar} alt="Аватар" /> 
+                                        <img src={props.profile.profile.photos.small} className={styles.headerAvatar} alt="Аватар" />
                                     </Link> :
                                     null
                             }
                             <button onClick={handleActive}>
-                                <p>{props.userData.fullName}</p>
+                                <p>{props.profile.profile.fullName}</p>
                             </button>
 
                         </div>

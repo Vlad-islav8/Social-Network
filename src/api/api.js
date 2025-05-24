@@ -43,7 +43,7 @@ export const authAPI = {
         return (
             inctance
                 .post('auth/login', {email, password, rememberMe, captcha: false})
-                .then(response => response)
+                .then(response => response.data)
         )
     },
     logoutUser() {

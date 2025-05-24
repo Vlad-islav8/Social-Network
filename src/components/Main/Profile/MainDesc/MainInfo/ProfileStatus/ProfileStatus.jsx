@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProfileStatus.module.css'
+import hadnle from "../../../../../../utils/hadnle";
 
 const ProfileStatus = (props) => {
+    debugger
     const [editMode, setEditMode] = useState(false)
     const [status, setStatus] = useState(props.profileStatus)
 
     const handleEditMode = () => {
-        if (props.isMe) {
-            (editMode)
-                ? setEditMode(false)
-                : setEditMode(true)
-        }
+        (props.isMe && hadnle(editMode, setEditMode))
     }
-
     const onUpdateStatus = (event) => {
         if (event.key === 'Enter') {
             props.updateStatus(status)
@@ -43,13 +40,13 @@ const ProfileStatus = (props) => {
                     </div>
                     : <div className={styles.statusBlock}>
                         {
-                            (props.authid === props.profileId) ?
+                            (props.isMe) ?
                                 <p className={styles.status}>{
                                     (props.profileStatus) ?
                                         props.profileStatus :
                                         <span title='Нажмите дважды для установи нового статуса' className={styles.editStatus}>Установить статус...</span>
-                                }</p>
-                                : <p>{props.profileStatus || <span className={styles.statusRemove}>статус отсутствует</span>}</p>
+                                 }</p>
+                                : <p>{props.profileStatus}</p>
                         }
                     </div>
             }

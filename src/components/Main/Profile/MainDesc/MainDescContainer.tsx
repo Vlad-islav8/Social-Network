@@ -13,14 +13,21 @@ import mainLink from '../../../../images/mainLink.svg';
 import {getIsFollowered, getProfile, getProfileStatus, getUpdateAvaIsFetching} from "../../../../redux/selectors/profileSelector";
 import {isMe} from "../../../../Hok/isMe";
 import {useCallback} from "react";
-import {addAvatarThuckCreator, followUserThunkCreator, getUserProfileThunkCreator, putProfileDataThuncCreator, updateStatusThuncCreator} from "../../../../redux/profileReducer";
+import {
+    addAvatarThuckCreator,
+    followUserThunkCreator,
+    getUserProfileThunkCreator,
+    profileType,
+    putProfileDataThuncCreator,
+    updateStatusThuncCreator
+} from "../../../../redux/profileReducer";
 import {getMeId} from "../../../../redux/selectors/isAuthSelector";
 import * as React from "react";
 
 const MainDescContainer = (props:any) => {
-    const userId = props.meId
-    const profile = props.profile.profile
-    const contacts = profile.contacts
+    const userId:number = props.meId
+    const profile:profileType = props.profile.profile
+    const contacts:object = profile.contacts
 
     const imageArr:{name: string, link: string}[] = [
         {name: 'facebook', link: facebook},
@@ -38,23 +45,22 @@ const MainDescContainer = (props:any) => {
     }, [props])
 
     const updateAvatar = async (avatar:any) => {
-        debugger
         await props.addAvatarThuckCreator(avatar)
         props.getUserProfileThunkCreator(userId)
     }
 
     const handlePutUserData = async (data:any) => {
-        const response = await props.putProfileDataThuncCreator(data)
+        await props.putProfileDataThuncCreator(data)
         props.getUserProfileThunkCreator(userId)
     }
-    const handleremoveLink =  (name:any) => {
+    const handleremoveLink =  (name:string) => {
         if(name === "" || !name) {
             return
         }
          submitData(profile, {...contacts, [name]: null})
     }
 
-    const submitData = (obj:any, contactsObj:any) => {
+    const submitData = (obj:profileType, contactsObj:any) => {
         type userDataType = {
             aboutMe: string | null
             userId: number
@@ -77,13 +83,10 @@ const MainDescContainer = (props:any) => {
             userId: profile.userId,
             lookingForAJob: obj.lookingForAJob || profile.lookingForAJob,
             lookingForAJobDescription: obj.lookingForAJobDescription || profile.lookingForAJobDescription,
-            fullName: obj.fullname || profile.fullName,
-            contacts: (contactsObj) ?
-                {
-                    ...contactsObj,
-                    [contactsObj.name]: contactsObj.link,
-
-                }
+            fullName: obj.fullName || profile.fullName,
+            contacts:
+                (contactsObj) ?
+                {...contactsObj, [contactsObj.name]: contactsObj.link,}
                 : contacts
         }
         handlePutUserData(userData)
@@ -91,9 +94,20 @@ const MainDescContainer = (props:any) => {
     const handleFollowered = (userId:number, followAction:string) => {
         props.followUserThunkCreator(userId, followAction)
     }
+
     return (
         <>
-            <MainDesc />
+            <MainDesc
+                imageArr={imageArr}
+                {...props}
+                updateStatus={updateStatus}
+                updateAvatar={updateAvatar}
+                handlePutUserData={handlePutUserData}
+                submitData={submitData}
+                handleremoveLink={handleremoveLink}
+                isFollowered={props.isFollowered}
+                handleFollowered={handleFollowered}
+            />
         </>
     )
 }

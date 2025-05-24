@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import styles from './Avatar.module.css'
+import defaultAvaImage from '../../../../../../images/defaultAvaImage.jpg'
 export const Avatar = (props) => {
     const avaRef = useRef(null)
     const handleDoubleClickToAva = () => {
@@ -21,7 +22,7 @@ export const Avatar = (props) => {
                             className={`${styles.avatar} ${styles.avatarLoading}`}
                             src={
                                 (!props.smallPhoto) ?
-                                    'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
+                                    defaultAvaImage :
                                     props.smallPhoto
                             }
                             alt="avatar" />
@@ -34,7 +35,7 @@ export const Avatar = (props) => {
                                 className={styles.avatar}
                                 src={
                                     (!props.smallPhoto) ?
-                                        'https://justvision.org/sites/default/files/2019-11/ofer-shinar.png' :
+                                        defaultAvaImage :
                                         props.smallPhoto
                                 }
                                 alt="avatar"
