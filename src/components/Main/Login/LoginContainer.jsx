@@ -1,44 +1,71 @@
-import LoginReduxForm from "./Login";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {isMe} from "../../../Hok/isMe";
-import {getCapchaUrlThunkCreator, loginUserThuncCreator} from "../../../redux/authReducer";
+import { Formik } from 'formik';
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { isMe } from "../../../Hok/isMe";
+import { getCapchaUrlThunkCreator, loginUserThuncCreator } from "../../../redux/authReducer";
 import Preloader from "../../Preloader/Preloader";
-import {reduxForm} from "redux-form";
-import {useNavigate} from "react-router-dom";
-import {getCapchaUrl, getErrorMessage, getIsAuth, getIsLoading} from "../../../redux/selectors/isAuthSelector";
+import { useNavigate } from "react-router-dom";
+import { getCapchaUrl, getErrorMessage, getIsAuth, getIsLoading } from "../../../redux/selectors/isAuthSelector";
+import LoginForm from "./Login"; // Переименуем компонент
 
 const LoginContainer = (props) => {
-    const redirect = useNavigate()
+    const navigate = useNavigate();
+
     if (props.isLoading) {
-        return <Preloader/>
+        return <Preloader/>;
     } else if (props.isAuth) {
-        redirect('/')
+        navigate('/');
     }
+
     const getCapcha = () => {
-        props.getCapchaUrlThunkCreator()
-    }
+        props.getCapchaUrlThunkCreator();
+    };
+
+    // Обработчик submit для Formik
+    const handleSubmit = (values, { setSubmitting }) => {
+        props.loginUserThuncCreator(
+            values.email,
+            values.password,
+            values.rememberMe,
+            values.captcha,
+            setSubmitting
+        );
+    };
+
     return (
-        <LoginReduxForm {...props} getCapcha={getCapcha}/>
-    )
-}
-const mapStateToProps = (state) => {
-    return {
-        isAuth: getIsAuth(state),
-        isLoading: getIsLoading(state),
-        errorMessage: getErrorMessage(state),
-        capchaUrl: getCapchaUrl(state)
-    }
-}
+        <Formik
+            initialValues={{
+                email: '',
+                password: '',
+                rememberMe: false,
+                captcha: '',
+            }}
+            onSubmit={handleSubmit}
+        >
+            {(formikProps) => (
+                <LoginForm
+                    {...formikProps}
+                    {...props}
+                    getCapcha={getCapcha}
+                />
+            )}
+        </Formik>
+    );
+};
+
+const mapStateToProps = (state) => ({
+    isAuth: getIsAuth(state),
+    isLoading: getIsLoading(state),
+    errorMessage: getErrorMessage(state),
+    capchaUrl: getCapchaUrl(state)
+});
 
 const mapDispatchToProps = {
-        loginUserThuncCreator,
-        getCapchaUrlThunkCreator
-}
+    loginUserThuncCreator,
+    getCapchaUrlThunkCreator
+};
+
 export default compose(
     isMe,
-    connect(mapStateToProps, mapDispatchToProps),
-    reduxForm({
-        form: 'login'
-    })
-)(LoginContainer)
+    connect(mapStateToProps, mapDispatchToProps)
+)(LoginContainer);

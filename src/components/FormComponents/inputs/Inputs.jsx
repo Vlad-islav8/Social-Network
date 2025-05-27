@@ -12,11 +12,9 @@ const onErrorMessage = (error, meta, errorMessage) => {
     }
 }
 export const BazeInput = ({input, meta, placeholder, type, errorMessage}) => {
-    const error = meta.touched && meta.error
     return (
         <div className={`${styles.BazeInput}`}>
-            <input placeholder={placeholder} type={type} {...input}  className={`${(error) ? styles.Error : undefined}`}/>
-            { onErrorMessage(error, meta, errorMessage) }
+            <input placeholder={placeholder} type={type} {...input}  />
         </div>
     )
 }

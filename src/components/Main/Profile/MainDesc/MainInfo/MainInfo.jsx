@@ -2,7 +2,7 @@ import styles from "./MainInfo.module.css"
 import {Avatar} from "./Avatar/Avatar";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import editProfile from "../../../../../images/editProfile.svg";
-import EditProfileReduxForm from "./EditProfile/EditProfile";
+import EditProfile from "./EditProfile/EditProfile";
 import headerDefaultImage from '../../../../../images/headerDefaultImage.jpeg'
 import {useState} from "react";
 const MainInfo = (props) => {
@@ -57,7 +57,7 @@ const MainInfo = (props) => {
                                      alt="Редактировать профиль"/>
                             </button>
 
-                            <EditProfileReduxForm
+                            <EditProfile
                                 handleActivePanel={props.handleActivePanel}
                                 editMode={editMode}
                                 handlePutUserData={props.handlePutUserData}

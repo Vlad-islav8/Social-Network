@@ -1,7 +1,7 @@
 import styles from './Profile.module.css'
 import MyPosts from "./MyPosts/MyPosts";
 import Preloader from "../../Preloader/Preloader";
-import {AddPostForm} from './Addpost/Addpost';
+import AddPost from './Addpost/Addpost';
 import MainDescContainer from "./MainDesc/MainDescContainer";
 
 function Profile(props) {
@@ -12,7 +12,7 @@ function Profile(props) {
                 <div className={styles.posts}>
                     {(props.isMe)
                         ?
-                        <AddPostForm
+                        <AddPost
                             isMe={props.isMe}
                             onAddPost={props.onAddPost}
                         />

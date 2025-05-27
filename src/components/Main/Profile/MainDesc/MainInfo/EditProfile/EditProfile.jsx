@@ -1,9 +1,8 @@
 import styles from './EditProfile.module.css'
 import removeIcon from '../../../../../../images/removeIcon.svg'
 import plus from '../../../../../../images/plus.svg'
-import {requiredInput} from '../../../../../../utils/validators/validators'
-import {EditProfileInput} from '../../../../../FormComponents/inputs/Inputs'
-import {Field, reduxForm,} from 'redux-form'
+import {Formik, Form, Field} from "formik";
+
 import {useRef, useState} from 'react'
 
 const InputItem = (props) => {
@@ -79,6 +78,7 @@ const EditProfile = (props) => {
         }
     }
     return (
+
         <div className={`${styles.EditProfile} ${(props.editMode && styles.editModeActive)}`}>
             <div className={`${styles.FormContainer}`}>
                 <button onClick={removeEditMode} className={styles.removeBtn}>
@@ -87,62 +87,60 @@ const EditProfile = (props) => {
                 <header className={styles.header}>
                     <p className={styles.headerText}>Заполинте данные профиля</p>
                 </header>
-                <form action="" className={styles.EditProfileForm} onSubmit={props.handleSubmit(OnSubmitData)}>
-                    <div className={styles.formDataContainer}>
-                        <InputItem
-                            label='Ваше имя'
-                            type={'text'}
-                            name='fullName'
-                            id='fullName'
-                            value={fullName}
-                            hableInputsChange={hableInputsChange}
-                        />
-                        <InputItem
-                            label='Расскажите о себе'
-                            type={'textarea'}
-                            id='AboutMe'
-                            name='AboutMe'
-                            value={aboutMe}
-                            hableInputsChange={hableInputsChange}
-
-                        />
-                        <div className={styles.checkboxInput}>
+                <Formik initialValues={''} onSubmit={props.handleSubmit(OnSubmitData)}>
+                    <Form className={styles.EditProfileForm}>
+                        <div className={styles.formDataContainer}>
                             <InputItem
-                                label='в поиске работы'
-                                type={'checkbox'}
-                                id='lookingForAJob'
-                                name='lookingForAJob'
-                                value={lookingForAJob}
-                                hableInputsChange={hableInputsChange}
-                            />
-                        </div>
-
-                        {(lookingForAJob &&
-                            <InputItem
-                                label='Описание к поиску работы'
+                                label='Ваше имя'
                                 type={'text'}
-                                id='lookingForAJobDescription'
-                                name='lookingForAJobDescription'
-                                value={JobDescription}
+                                name='fullName'
+                                id='fullName'
+                                value={fullName}
                                 hableInputsChange={hableInputsChange}
                             />
-                        )}
+                            <InputItem
+                                label='Расскажите о себе'
+                                type={'textarea'}
+                                id='AboutMe'
+                                name='AboutMe'
+                                value={aboutMe}
+                                hableInputsChange={hableInputsChange}
 
-                        <div className={styles.submit}>
-                            <button type={"submit"} >
-                                <img src={plus} alt="отправить"/>
-                            </button>
+                            />
+                            <div className={styles.checkboxInput}>
+                                <InputItem
+                                    label='в поиске работы'
+                                    type={'checkbox'}
+                                    id='lookingForAJob'
+                                    name='lookingForAJob'
+                                    value={lookingForAJob}
+                                    hableInputsChange={hableInputsChange}
+                                />
+                            </div>
+
+                            {(lookingForAJob &&
+                                <InputItem
+                                    label='Описание к поиску работы'
+                                    type={'text'}
+                                    id='lookingForAJobDescription'
+                                    name='lookingForAJobDescription'
+                                    value={JobDescription}
+                                    hableInputsChange={hableInputsChange}
+                                />
+                            )}
+
+                            <div className={styles.submit}>
+                                <button type={"submit"} >
+                                    <img src={plus} alt="отправить"/>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </Form>
+                </Formik>
 
-                </form>
             </div>
         </div>
     )
 }
 
-const EditProfileReduxForm = reduxForm({
-    form: 'editprofile'
-})(EditProfile)
-
-export default EditProfileReduxForm
+export default EditProfile
