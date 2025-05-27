@@ -11,6 +11,7 @@ import { appInitializeThunkCreator } from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
 import { getInitialize } from './redux/selectors/appSelector';
 import { getIsAuth } from './redux/selectors/isAuthSelector';
+import {CursorShadow} from "./components/CursorShadow/CursorShadow";
 const Music = lazy(() => import('./components/Main/Music/Music'))
 const Settings = lazy(() => import('./components/Main/Settings/Settings'))
 const DialogsContainer = lazy(() => import('./components/Main/Dialogs/DialogsContainer'))
@@ -81,7 +82,7 @@ function App(props) {
                         </div>
                     </div>
                 </div>
-                {/*<CursorShadow mouseY={mouseY} mouseX={mouseX} />*/}
+                <CursorShadow mouseY={mouseY} mouseX={mouseX} />
             </div>
         </BrowserRouter>
     );

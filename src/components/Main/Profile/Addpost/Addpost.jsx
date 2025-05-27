@@ -3,28 +3,32 @@ import { Field, Form, Formik} from "formik";
 import { maxLenghtCreator, ivReques } from "../../../../utils/validators/validators";
 import { AddPostTextArea } from "../../../FormComponents/inputs/Inputs";
 import { useState } from 'react';
-
+import handle from '../../../../utils/hadnle'
 const maxLenght = maxLenghtCreator(500)
 
 const Addpost = (props) => {
-    const submit = (post) => {
-        props.onAddPost(post.addpost)
+    const submit = (value) => {
+        props.onAddPost(value.post)
     }
     const [isFocus, setIsFocus] = useState(false)
 
     const handleFocus = () => {
-        (isFocus) ? setIsFocus(false) : setIsFocus(true)
+         handle(isFocus, setIsFocus)
     }
 
     return (
 
         <div className={styles.addPostContainer}>
-            <Formik initialValues={''} onSubmit={props.handleSubmit(submit)} onFocus={handleFocus} onBlur={handleFocus}>
-                <Form className={`${styles.addpost} ${(isFocus) ? styles.focus : ''}`}>
+            <Formik
+                initialValues={{
+                    post: ''
+                }}
+                onSubmit={submit}>
+
+                <Form className={`${styles.addpost} ${(isFocus) ? styles.focus : ''}`} onFocus={handleFocus} onBlur={handleFocus}>
                         <Field
                             as={AddPostTextArea}
-                            name="addpost"
-                            validate={[maxLenght, ivReques]}
+                            name="post"
                             placeholder='Создайте новый пост..'
                             className={styles.notActive}
                         />

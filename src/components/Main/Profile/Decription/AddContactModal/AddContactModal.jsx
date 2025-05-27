@@ -26,7 +26,7 @@ const AddContactModal = (props) => {
     return (
         <div className={`${styles.addContactModal} ${(props.addContactMode) ? styles.addContactModalActive : ''}`}
              onClick={isClickToForm}>
-            <Formik initialValues={''} onSubmit={props.handleSubmit(onSubmit)}>
+            <Formik initialValues={''} onSubmit={onSubmit}>
                 <Form className={styles.addContactForm} onClick={clickForm}>
                     <button className={styles.remove} onClick={props.handleAddContactMode}>
                         <img className={styles.removeImage} src={removeIcon} alt=""/>

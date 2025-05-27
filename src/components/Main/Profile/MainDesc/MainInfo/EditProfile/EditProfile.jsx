@@ -87,7 +87,7 @@ const EditProfile = (props) => {
                 <header className={styles.header}>
                     <p className={styles.headerText}>Заполинте данные профиля</p>
                 </header>
-                <Formik initialValues={''} onSubmit={props.handleSubmit(OnSubmitData)}>
+                <Formik initialValues={''} onSubmit={OnSubmitData}>
                     <Form className={styles.EditProfileForm}>
                         <div className={styles.formDataContainer}>
                             <InputItem
