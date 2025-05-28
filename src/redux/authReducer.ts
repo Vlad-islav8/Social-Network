@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { authAPI } from "../api/api";
 import {getUserProfileThunkCreator, } from "./profileReducer";
-interface initialStateType  {
+export interface AuthStateType  {
     id: number | null,
     login: string | null,
     email: string | null,
@@ -32,7 +32,7 @@ interface getUserType  {
     resultCode: number
 }
 interface thinkType {(dispatch:Function): Promise<void>}
-let initialState:initialStateType = {
+let initialState:AuthStateType = {
     id: null,
     login: null,
     email: null,
@@ -46,27 +46,27 @@ const authReducer = createSlice({
     name: 'authReducer',
     initialState,
     reducers: {
-        setUserData(state:initialStateType, action:PayloadAction<authType>):void {
+        setUserData(state:AuthStateType, action:PayloadAction<authType>):void {
             state.email = action.payload.email
             state.id = action.payload.id
             state.login = action.payload.login
         },
-        setErrorMessage(state:initialStateType, action:PayloadAction<string>):void {
+        setErrorMessage(state:AuthStateType, action:PayloadAction<string>):void {
             state.errorMessage = action.payload
         },
-        deleteUserProfileData(state:initialStateType):void {
+        deleteUserProfileData(state:AuthStateType):void {
             state.id = null
             state.login = null
             state.email = null
             state.isAuth = null
         },
-        setLoadingStatus(state, action:PayloadAction<boolean>):void {
+        setLoadingStatus(state:AuthStateType, action:PayloadAction<boolean>):void {
            state.isLoading = action.payload
         },
-        setIsAuth(state, action:PayloadAction<boolean>):void {
+        setIsAuth(state:AuthStateType, action:PayloadAction<boolean>):void {
             state.isAuth = action.payload
         },
-        setCapchaUrl(state, action:PayloadAction<string>):void {
+        setCapchaUrl(state:AuthStateType, action:PayloadAction<string>):void {
             state.capchaUrl = action.payload
         }
     }

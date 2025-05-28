@@ -28,7 +28,7 @@ export interface profileType {
     photos: photosType
 
 }
-interface initialStateType {
+export interface ProfileStateType {
     posts: postsType[]
     profile: profileType,
     profileStatus: string | null,
@@ -53,7 +53,7 @@ interface responceTypePhotos {
     data: UserPhotos
 }
 
-let initialState: initialStateType = {
+let initialState:ProfileStateType = {
     posts: [],
     profile: null,
     profileStatus: "Дефолт статус",
@@ -68,20 +68,20 @@ const profileReducer = createSlice({
     name: 'profileReducer',
     initialState,
     reducers: {
-        onAddPost(state:initialStateType, action:PayloadAction<string>) {
+        onAddPost(state:ProfileStateType, action:PayloadAction<string>) {
             const newPost: postsType = {
                 id: Number(nanoid()),
                 text: action.payload,
             }
             state.posts.push(newPost)
         },
-        setUsersProfile(state:initialStateType, action:PayloadAction<profileType>):void {
+        setUsersProfile(state:ProfileStateType, action:PayloadAction<profileType>):void {
             state.profile = action.payload
         },
-        setProfileStatus(state:initialStateType, action:PayloadAction<string>):void {
+        setProfileStatus(state:ProfileStateType, action:PayloadAction<string>):void {
             state.profileStatus = action.payload
         },
-        setProfilePhoto(state:initialStateType, action:PayloadAction<photosType>):void {
+        setProfilePhoto(state:ProfileStateType, action:PayloadAction<photosType>):void {
             const small: string = action.payload.small
             const large: string = action.payload.large
             if (small) {
@@ -90,13 +90,13 @@ const profileReducer = createSlice({
                 state.profile.photos.large = large
             }
         },
-        setUpdateAvaISFetching(state:initialStateType, action:PayloadAction<boolean>):void {
+        setUpdateAvaISFetching(state:ProfileStateType, action:PayloadAction<boolean>):void {
             state.updateAvaIsFetching = action.payload
         },
-        setPutFetching(state:initialStateType, action:PayloadAction<boolean>):void {
+        setPutFetching(state:ProfileStateType, action:PayloadAction<boolean>):void {
             state.putFetching = action.payload
         },
-        setToogleFollow(state:initialStateType, action:PayloadAction<boolean>):void {
+        setToogleFollow(state:ProfileStateType, action:PayloadAction<boolean>):void {
             state.isFollowered = action.payload
         }
     }

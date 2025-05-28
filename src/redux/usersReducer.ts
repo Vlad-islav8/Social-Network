@@ -19,7 +19,7 @@ interface UsersType {
     totalCount: number
     error: null | string
 }
-interface initialStateType {
+export interface UsersStateType {
     users: UserType[]
     usersPages: number
     totalUsersCount: number
@@ -27,7 +27,7 @@ interface initialStateType {
     isFetching: boolean
     followingFetching: number[]
 }
-let initialState:initialStateType = {
+let initialState:UsersStateType = {
     users: [],
     usersPages: 100,
     totalUsersCount: 14,

@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { getAuthUserThunkCreator } from "./authReducer";
 
-interface initialStateType  {
+export interface AppStateType  {
     initialize: boolean
 }
 interface thinkType {(dispatch:Function): Promise<void>}
-let initialState:initialStateType = {
+let initialState:AppStateType = {
     initialize: false
 }
 
@@ -13,7 +13,7 @@ const appReducer = createSlice({
     name: 'appReducer',
     initialState,
     reducers: {
-        setinitialize(state:initialStateType):void{
+        setinitialize(state:AppStateType):void{
             state.initialize = true
         }
     }

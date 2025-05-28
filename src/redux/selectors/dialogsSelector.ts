@@ -1,6 +1,8 @@
 import { createSelector } from "reselect"
+import {RootState} from "../reduxStore";
+import {DialogsStateType} from "../dialogsReducer";
 
-export const getDialogs = (state) => {
+export const getDialogs = (state:RootState) => {
     return state.dialogs
 }
 

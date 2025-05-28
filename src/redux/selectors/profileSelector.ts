@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import {RootState} from "../reduxStore";
 
-export const getProfile = (state) => {
+export const getProfile = (state:RootState) => {
     return state.profile
 }
 
@@ -22,7 +23,7 @@ export const getProfileId = createSelector([getProfile],
     }
 )
 
-export const getUpdateAvaIsFetching = (state) => {
+export const getUpdateAvaIsFetching = (state:RootState) => {
     return state.profile.updateAvaIsFetching
 }
 
