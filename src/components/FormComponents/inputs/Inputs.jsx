@@ -34,7 +34,6 @@ export const BazeTextArea = ({ field, form, ...props }) => {
 }
 
 export const AddPostTextArea = ({ field, form, ...props }) => {
-    debugger
     return (
         <textarea
             {...field}

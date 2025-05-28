@@ -38,7 +38,10 @@ interface initialStateType {
     isFollowered: boolean | null
 }
 interface thinkType  {(dispatch:Function): Promise<void>}
-
+export interface UserPhotos {
+    small: string
+    large: string
+}
 interface responceType {
     resultCode: number
     messages: []
@@ -47,10 +50,7 @@ interface responceType {
 interface responceTypePhotos {
     resultCode: number
     messages: []
-    data: {
-        small: string
-        large: string
-    }
+    data: UserPhotos
 }
 
 let initialState: initialStateType = {

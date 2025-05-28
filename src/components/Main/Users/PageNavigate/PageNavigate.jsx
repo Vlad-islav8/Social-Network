@@ -2,11 +2,11 @@ import styles from "./PageNavigate.module.css";
 import prev from "../../../../images/prev.svg";
 import search from "../../../../images/search.svg";
 import next from "../../../../images/next.svg";
-import React, { useRef } from "react";
+import React, {useRef, useState} from "react";
 
 const PageNavigate = (props) => {
     let inputRef = useRef(null)
-
+    const [pageNumber, setPageNumber] = useState(props.currenPages)
     let pagesCount = Math.ceil(props.totalUsersCount / props.usersPages)
     const pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -20,8 +20,13 @@ const PageNavigate = (props) => {
             props.onPageChanged(props.currenPages - 1)
         }
     }
-    const handlesetPageNumberActive = () => {
-        props.setPageNumberActive(inputRef.current.value, pagesCount)
+    const handlePressKey = (eventKey) => {
+        if(eventKey.key === 'Enter' || 'enter') {
+            handleOnSearch()
+        }
+    }
+    const handleSetValue = () => {
+        setPageNumber(inputRef.current.value)
     }
     const handleOnSearch = () => {
         props.onPageChanged(props.currenPages)
@@ -33,7 +38,7 @@ const PageNavigate = (props) => {
             <button className={styles.navBtn} onClick={() => {handleOnPageChanged('next')}}>
                 <img src={prev} alt="" />
             </button>
-            <input ref={inputRef} type="text" value={props.currenPages} onChange={handlesetPageNumberActive} />
+            <input ref={inputRef} type="text" value={pageNumber} onChange={handleSetValue} onKeyDown={handlePressKey}/>
             <button className={styles.searh} onClick={handleOnSearch}>
                 <img src={search} alt="" />
             </button>

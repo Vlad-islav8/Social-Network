@@ -1,93 +1,57 @@
 .nav {
-    margin: 0;
-    display: block;
-    width: 200px;
-    background-color: #2b2b2b;
-    transition: margin 1s ease;
-    position: sticky;
-    top: 0;
-    height: 100%;
-    z-index: 9;
-    border-radius: 40px 40px ;
-    padding: 1rem 0;
-    margin-right: 2rem;
-
-}
-
-.activePanelBtn {
-    right: calc(50% - 10px);
-    bottom: -5rem;
-    position: absolute;
-    width: 10px;
-    height: 40px;
-    margin-left: 0; /* Убираем лишний отступ */
-    font-size: 2rem;
-    transition: transform 0.5s ease,font-size 0.5s ease, right 0.5s ease;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-}
-
-.activePanelBtn:hover {
-    font-size: 2.5rem;
-}
-
-
-.activePanelBtn {
     background-color: #222;
-    box-shadow: 0px 0px 40px 20px rgba(255, 255, 255, 0.2);
     padding: 1rem;
-}
-.activeBtn {
-    right: -30px;
-    transform: rotate(180deg);
+    width: 20vh;
+    position: relative;
+
 }
 
-.unVisibule {
-    margin-left: -12.5rem;
-    margin-right: 0;
+.activePanelBtn {
+    margin-top: 4rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.activePanelBtn:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.panerArrow {
+    font-size: 1rem;
 }
 
-.nav ul {
+.linkList {
     display: flex;
     flex-direction: column;
 }
 
 .item {
-    color: #222222;
-    padding: 0.8rem;
-    font-size: 0.8rem;
-    background-color: #f0f0f0;
-    transition: all 0.5s;
-    margin-top: 0.5rem ;
-    text-align: center;
+    padding: 1rem;
+    color: white;
 }
-.item:nth-child(1)  {
-    margin: 0;
-    border-radius: 40px 40px 0 0;
+
+.navTop {
+    padding: 0;
+    width: auto;
+    background-color: #2b2b2b;
+
+    margin-left: 2rem;
 }
-.item:nth-last-child(1) {
-    border-radius: 0 0 40px 40px ;
+
+.ulTop {
+    flex-direction: row;
+
 }
+
 .item:hover {
-    background-color: #f7f7f7;
-    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
-    z-index: 10;
-    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.activePanelBtnTop {
+    margin-left: 5rem;
 }
 
 .active {
-    background-color: white;
-    transition: all 0.5s;
+    background-color: rgba(0, 0, 0, 0.4);
 }
-
-.active:hover {
-    background-color: #f7f7f7;
-    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
-    z-index: 999;
-    padding: 1rem;
-    font-size: 1rem;
-}
-

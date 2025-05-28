@@ -6,7 +6,6 @@ import {getUserProfileThunkCreator} from "../../redux/profileReducer";
 import {getProfile} from "../../redux/selectors/profileSelector";
 
 const HeaderContainer = (props) => {
-    debugger
     useEffect(() => {
         props.getAuthUserThunkCreator()
     },[])

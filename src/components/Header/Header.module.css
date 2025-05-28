@@ -1,18 +1,21 @@
 .header {
     top: 0;
+    margin-bottom: 1rem;
+    left: 0;
     position: sticky;
     z-index: 1;
     background-color: #222;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     padding: 1rem 3rem;
     height: 10vh;
-    border-radius: 40px;
-    margin: 2rem 0;
+    border-radius: 0 0 20px 20px;
+    justify-content: space-between;
 }
 
 .header a {
+    display: block;
     color: #fff;
     text-decoration: none;
     transition: all .2s ;
@@ -20,5 +23,9 @@
 
 .header a:active {
     transform: scale(0.95);
+}
 
+.left {
+    display: flex;
+    align-items: center;
 }

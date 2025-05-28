@@ -11,18 +11,22 @@ import { appInitializeThunkCreator } from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
 import { getInitialize } from './redux/selectors/appSelector';
 import { getIsAuth } from './redux/selectors/isAuthSelector';
-import {CursorShadow} from "./components/CursorShadow/CursorShadow";
+
 const Music = lazy(() => import('./components/Main/Music/Music'))
 const Settings = lazy(() => import('./components/Main/Settings/Settings'))
 const DialogsContainer = lazy(() => import('./components/Main/Dialogs/DialogsContainer'))
 const UsersContainer = lazy(() => import('./components/Main/Users/UsersContainer'))
 const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer'))
-
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
-function App(props) {
 
+function App(props) {
     const [mouseY, setMouseY] = useState(null)
     const [mouseX, setMouseX] = useState(null)
+    const [navPosition, setNavPosition] = useState('left')
+
+    const handleNavPsoition = () => {
+        (navPosition === 'left') ? setNavPosition('top') : setNavPosition('left')
+    }
     useEffect(() => {
         props.appInitializeThunkCreator()
     }, [props.appInitializeThunkCreator])
@@ -30,23 +34,35 @@ function App(props) {
     if (!props.initialize || props.isAuth === undefined) {
         return <Preloader />
     }
-    const hadnleMouseMove = (event) => {
+
+    const handleMouseMove = (event) => {
         setMouseY(event.clientY)
         setMouseX(event.clientX)
     }
 
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <div className='wrapper' onMouseMove={hadnleMouseMove}>
-                <div className='appContainer'>
-                    <HeaderContainer />
-                    <div className='mainContainer'>
-                        <Nav/>
-                        <div className='routes'>
+            <div className='app-wrapper' onMouseMove={handleMouseMove}>
+                <HeaderContainer
+                    navPosition={navPosition}
+                    handleNavPsoition={handleNavPsoition}
+                />
+
+                <div className='app-content'>
+                    {
+                        (
+                            navPosition === 'left' &&
+                            <Nav
+                                navPosition={navPosition}
+                                handleNavPsoition={handleNavPsoition}
+                            />
+                        )
+                    }
+
+                    <main className='app-main'>
+                        <div className='app-routes'>
                             <Routes>
-                                <Route path="/profile/:userId?" element={
-                                    <ProfileContainer/>
-                                } />
+                                <Route path="/profile/:userId?" element={<ProfileContainer/>} />
                                 <Route path="/" element={<ProfileContainer />} />
                                 <Route path="/dialogs" element={
                                     <Suspense fallback={<Preloader />}>
@@ -80,14 +96,14 @@ function App(props) {
                                 } />
                             </Routes>
                         </div>
-                    </div>
+                    </main>
                 </div>
-                <CursorShadow mouseY={mouseY} mouseX={mouseX} />
             </div>
         </BrowserRouter>
     );
 }
-let mapStateToProps = (state) => ({
+
+const mapStateToProps = (state) => ({
     initialize: getInitialize(state),
     isAuth: getIsAuth(state)
 });
@@ -96,4 +112,3 @@ export default compose(
     withRouter,
     connect(mapStateToProps, { appInitializeThunkCreator })
 )(App);
-

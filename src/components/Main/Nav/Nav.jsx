@@ -1,30 +1,58 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styles from './Nav.module.css'
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function Nav(props) {
-  const activeClass = ({ isActive }) => (isActive ? styles.active : '')
+    const [activePage, setActivePage] = useState(null)
 
-  const [activePanel, setActivePanel] = useState(false)
+    const handleActivePage = (page) => {
+        setActivePage(page)
+    }
 
-  const handleActivePanel = () => {
-    (activePanel) ? setActivePanel(false) : setActivePanel(true)
-  }
+    return (
+        <nav className={`${styles.nav} ${(props.navPosition === 'top' && styles.navTop)}`}>
+            <ul className={`${styles.linkList} ${(props.navPosition === 'top' && styles.ulTop)}`}>
+                <NavLink
+                    to='/profile'
+                    className={`${styles.item} ${(activePage === 'profile' && styles.active)}`}
+                    onClick={() => {handleActivePage('profile')}}
+                >Profile</NavLink>
 
-  return (
-    <nav className={`${styles.nav} ${(activePanel) ? styles.unVisibule : ''}`}>
-      <ul>
-        <NavLink to='/profile' className={`${styles.item} ${activeClass}`}>Profile</NavLink>
-        <NavLink to='/dialogs' className={`${styles.item} ${activeClass}`}>Messages</NavLink>
-        <NavLink to='/users' className={`${styles.item} ${activeClass}`}>Users</NavLink>
-        <NavLink to='/music' className={`${styles.item} ${activeClass}`}>Music</NavLink>
-        <NavLink to='/settings' className={`${styles.item} ${activeClass}`} activeClassName={styles.active}>Settings</NavLink>
-      </ul>
-      <div onClick={handleActivePanel} className={`${styles.activePanelBtn} ${(activePanel) ? styles.activeBtn : ''}`}>
-        <span className={styles.panerArrow} >&lt;</span>
-      </div>
-    </nav>
-  )
+                <NavLink
+                    to='/dialogs'
+                    className={`${styles.item} ${(activePage === 'dialogs' && styles.active)}`}
+                    onClick={() => {handleActivePage('dialogs')}}
+                >dialogs</NavLink>
+
+                <NavLink
+                    to='/users'
+                    className={`${styles.item} ${(activePage === 'users' && styles.active)}`}
+                    onClick={() => {handleActivePage('users')}}
+                >users</NavLink>
+
+                <NavLink
+                    to='/music'
+                    className={`${styles.item} 
+                    ${(activePage === 'music' && styles.active)}`}
+                    onClick={() => {handleActivePage('music')}}
+                >music</NavLink>
+
+                <NavLink
+                    to='/settings'
+                    className={`${styles.item} 
+                    ${(activePage === 'settings' && styles.active)}`}
+                    onClick={() => {handleActivePage('settings')}}
+                >settings</NavLink>
+                <div
+                    className={`${(props.navPosition === 'top' && styles.activePanelBtnTop)} ${(props.navPosition === 'top') ? styles.item : styles.activePanelBtn}`}>
+                    <button className={`${styles.panerArrow}`} onClick={props.handleNavPsoition}>
+                        {(props.navPosition === 'left') ? 'На шапку' : 'На боковую'}
+                    </button>
+                </div>
+            </ul>
+
+        </nav>
+    )
 }
 
 
