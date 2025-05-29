@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksocial_network=self.webpackChunksocial_network||[]).push([[675],{4675:(s,c,e)=>{e.r(c),e.d(c,{default:()=>r});e(5043);const n="Music_music__rgCbS";var t=e(579);const r=function(){return(0,t.jsx)("div",{className:n,children:(0,t.jsx)("button",{children:"???"})})}}}]);
-//# sourceMappingURL=675.b4f6d6af.chunk.js.map
