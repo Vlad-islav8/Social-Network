@@ -7,6 +7,11 @@
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
-    "include": ["src/components", "src/index.d.ts"]
+    "include": ["src/components", "src/index.d.ts"],
+    "compilerOptions": {
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
+    },
+    "allowSyntheticDefaultImports": true
   }
 }

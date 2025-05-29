@@ -6,7 +6,7 @@ import {useState} from 'react';
 import loginSmile from '../../../images/loginSmile.png'
 import showPass from '../../../images/showPass.svg'
 import unShowPass from '../../../images/unShowPass.svg'
-import handle from '../../../utils/hadnle'
+import handle from '../../../utils/customHooks'
 
 const Login = (props) => {
     const [checkBox, setCheckBox] = useState(false)

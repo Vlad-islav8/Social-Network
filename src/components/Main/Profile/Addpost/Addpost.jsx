@@ -3,7 +3,7 @@ import { Field, Form, Formik} from "formik";
 import { maxLenghtCreator, ivReques } from "../../../../utils/validators/validators";
 import { AddPostTextArea } from "../../../FormComponents/inputs/Inputs";
 import { useState } from 'react';
-import handle from '../../../../utils/hadnle'
+import handle from '../../../../utils/customHooks'
 const maxLenght = maxLenghtCreator(500)
 
 const Addpost = (props) => {

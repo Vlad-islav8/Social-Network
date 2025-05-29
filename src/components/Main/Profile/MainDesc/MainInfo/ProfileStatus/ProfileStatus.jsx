@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ProfileStatus.module.css'
-import hadnle from "../../../../../../utils/hadnle";
+import hadnle from "../../../../../../utils/customHooks";
 
 const ProfileStatus = (props) => {
     debugger

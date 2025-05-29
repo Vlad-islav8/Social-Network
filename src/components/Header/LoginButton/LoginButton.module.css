@@ -1,68 +1,112 @@
-.Pomogite {
-    opacity: 0;
-    transition: all 0.5s;
-    background: none;
-    border: none;
-    padding: 0.2rem 0.5rem;
-    text-align: end;
-    transform: translateY(-20px);
-    position: absolute;
-    bottom: -10px;
-    right: 0;
-}
-.Pomogite button {
-    color: white;
-}
-.active {
-    transform: translateY(0px);
-    opacity: 1;
-    color: white;
-    transition: all 0.5s;
-}
-
-.LoginButtonBlock {
+.loginContainer {
     position: relative;
+}
+
+.mainButton {
     display: flex;
     align-items: center;
-    margin: 0;
-    padding: 0;
 }
 
-.loginBtn {
-    background: none;
-    border: none;
-    padding: 0.2rem 0.5rem;
-    transition: all 0.5s;
-
-}
-
-
-.LoginOut {
-    background: none;
-    border: none;
-    padding: 0.2rem 0.5rem;
-    background-color: #222;
-    transition: all 0.5s;
-}
-
-
-
-.profileData {
+.profileInfo {
     display: flex;
-    flex-direction: row;
     align-items: center;
-
-}
-
-.headerAvatar {
-    margin-right: 1rem;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    transition: transform .5s ease;
-}
-
-.headerAvatar:hover {
+    gap: 10px;
     cursor: pointer;
+    background-color: rgba(2, 2, 2, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.avatar {
+    margin-right: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4a90e2;
+    transition: transform 0.3s ease;
+}
+
+.profileInfo .avatar:hover {
     transform: scale(1.1);
+}
+
+/* Кнопка с именем пользователя (без стандартного стиля кнопки) */
+.profileInfo > button {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s ease;
+}
+
+.profileInfo > button:hover {
+    color: #4a90e2;
+}
+
+/* Ссылка для входа */
+.loginLink a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.loginLink a:hover {
+    background-color: #4a90e2;
+    color: white;
+    border-color: #4a90e2;
+}
+
+.popup {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    border-radius: 8px;
+    padding: 10px 20px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 100;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Активное состояние попапа */
+.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Кнопка выхода */
+.popup button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.popup button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.popup button:hover:not(:disabled) {
+    background-color: #c0392b;
 }

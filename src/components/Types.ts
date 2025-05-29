@@ -1,3 +1,2 @@
 export type VoidFunction = () => void
-export type ThinkType = {(dispatch:Function): Promise<void>}
-
+export type ThinkType = () => (dispatch:Function) => any

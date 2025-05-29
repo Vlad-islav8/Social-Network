@@ -4,3 +4,4 @@ declare module '*.jsx' {
     var _: () => any;
     export default _;
 }
+declare module '*.module.css';

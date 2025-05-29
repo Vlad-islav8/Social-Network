@@ -1,10 +1,21 @@
 import styles from './Header.module.css'
 import {Link} from "react-router-dom";
 import {LoginButton} from "./LoginButton/LoginButton";
-import Preloader from "../Preloader/Preloader";
 import Nav from "../Main/Nav/Nav";
 import React from "react";
-function Header(props) {
+import {VoidFunction} from "../Types";
+import {profileType} from "../../redux/profileReducer";
+interface HeaderPropsType {
+    navPosition:string
+    handleNavPsoition:VoidFunction
+    isAuth:boolean
+    login:string
+    userId:number
+    profile:profileType
+    hanldeLogOut:VoidFunction
+}
+
+const Header:React.FC<HeaderPropsType> = (props) => {
     return (
         <header className={styles.header}>
             <div className={styles.left}>
@@ -22,9 +33,13 @@ function Header(props) {
             </div>
 
             {
-                (props.profile.profile)
+                (props.profile)
                     ?
-                    <LoginButton profile={props.profile} isAuth={props.isAuth} loginOut={props.loginOut}/>
+                    <LoginButton
+                        profile={props.profile}
+                        isAuth={props.isAuth}
+                        hanldeLogOut={props.hanldeLogOut}
+                    />
                     :
                     <span>Войдите в аккаунт</span>
             }

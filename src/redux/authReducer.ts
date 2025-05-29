@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { authAPI } from "../api/api";
 import {getUserProfileThunkCreator, } from "./profileReducer";
+import {ThinkType} from "../components/Types";
 export interface AuthStateType  {
     id: number | null,
     login: string | null,
@@ -31,7 +32,6 @@ interface getUserType  {
     messages: []
     resultCode: number
 }
-interface thinkType {(dispatch:Function): Promise<void>}
 let initialState:AuthStateType = {
     id: null,
     login: null,
@@ -83,14 +83,14 @@ export const {
     setCapchaUrl,
 } = authReducer.actions
 
-export const getCapchaUrlThunkCreator = ():thinkType => {
-    return async (dispatch:Function) => {
+export const getCapchaUrlThunkCreator = () => {
+    return async (dispatch:any) => {
         const responce = await authAPI.capcha()
         dispatch(setCapchaUrl(responce))
     }
 }
-export const getAuthUserThunkCreator = ():thinkType => {
-    return async (dispatch:Function) => {
+export const getAuthUserThunkCreator = () => {
+    return async (dispatch:any) => {
         const response:getUserType = await authAPI.getAuthUser()
         if (response.resultCode === 0) {
             const data:authType = response.data
@@ -102,8 +102,8 @@ export const getAuthUserThunkCreator = ():thinkType => {
         }
     }
 }
-export const loginUserThuncCreator = (email:string, password:number, rememberMe:boolean = false, capcha:string):thinkType => {
-    return async (dispatch:Function) => {
+export const loginUserThuncCreator = (email:string, password:number, rememberMe:boolean = false, capcha:string) => {
+    return async (dispatch:any) => {
         try {
             dispatch(setLoadingStatus(true))
             const loginUserResponce:loginType = await authAPI.loginUser(email, password, rememberMe, capcha)
@@ -121,8 +121,8 @@ export const loginUserThuncCreator = (email:string, password:number, rememberMe:
         }
     }
 }
-export const loginOutUserThuncCreator = ():thinkType => {
-    return async (dispatch:Function) => {
+export const loginOutUserThuncCreator = () => {
+    return async (dispatch:any) => {
         const logoutUserResponce:loginType = await authAPI.logoutUser()
         if (logoutUserResponce.resultCode === 0) {
             dispatch(deleteUserProfileData())

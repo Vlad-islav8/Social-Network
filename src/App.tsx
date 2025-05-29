@@ -1,5 +1,5 @@
 import './App.css';
-import {lazy, Suspense, useEffect, useState} from 'react';
+import React, {lazy, Suspense, useEffect, useState} from 'react';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Nav from './components/Main/Nav/Nav';
 import ProfileContainer from './components/Main/Profile/ProfileContainer';
@@ -9,7 +9,7 @@ import {appInitializeThunkCreator} from './redux/appReducer';
 import Preloader from './components/Preloader/Preloader';
 import {getInitialize} from './redux/selectors/appSelector';
 import {getIsAuth} from './redux/selectors/isAuthSelector';
-import {VoidFunction} from "./components/Types";
+import {VoidFunction} from './components/Types'
 
 const Music = lazy(() => import('./components/Main/Music/Music'))
 const Settings = lazy(() => import('./components/Main/Settings/Settings'))
@@ -18,7 +18,7 @@ const UsersContainer = lazy(() => import('./components/Main/Users/UsersContainer
 const LoginContainer = lazy(() => import('./components/Main/Login/LoginContainer'))
 const PageNotFound = lazy(() => import('./components/PageNotFound/PageNotFound'))
 
-function App() {
+const App:React.FC<any> = () => {
     const initialize: boolean = useSelector(getInitialize)
     const isAuth: boolean = useSelector(getIsAuth)
     const dispatch = useDispatch()
@@ -28,7 +28,7 @@ function App() {
         dispatch(appInitializeThunkCreator())
     }, [dispatch])
 
-    const handleNavPsoition: VoidFunction = () => {
+    const handleNavPsoition:VoidFunction   = () => {
         (navPosition === 'left') ? setNavPosition('top') : setNavPosition('left')
     }
     if (!initialize || isAuth === undefined) {

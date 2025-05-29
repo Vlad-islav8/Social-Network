@@ -5,7 +5,7 @@ import AddContactModal from "./AddContactModal/AddContactModal";
 import convertFunction from "../../../../utils/convertFunction";
 import deleteImage from '../../../../images/delete.svg'
 import deleteLink from '../../../../images/deleteLink.svg'
-import handle from '../../../../utils/hadnle'
+import handle from '../../../../utils/customHooks'
 const Decription = (props) => {
     const profile = props.profile.profile
     const contacts = props.profile.profile.contacts

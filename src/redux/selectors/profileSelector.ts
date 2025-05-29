@@ -4,7 +4,11 @@ import {RootState} from "../reduxStore";
 export const getProfile = (state:RootState) => {
     return state.profile
 }
-
+export const getMainProfile = createSelector([getProfile],
+    (profile) => {
+        return profile.profile
+    }
+)
 export const getPosts = createSelector([getProfile], 
     (profile) => {
         return profile.posts

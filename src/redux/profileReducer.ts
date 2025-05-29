@@ -37,7 +37,6 @@ export interface ProfileStateType {
     putFetching: boolean,
     isFollowered: boolean | null
 }
-interface thinkType  {(dispatch:Function): Promise<void>}
 export interface UserPhotos {
     small: string
     large: string
@@ -114,7 +113,7 @@ export const {
 
 export default profileReducer.reducer
 
-export const followUserThunkCreator = (userId:number, followAction:string):thinkType => {
+export const followUserThunkCreator = (userId:number, followAction:string) => {
     return async (dispatch:Function):Promise<void> => {
         if (followAction === "follow") {
             const responce:responceType = await usersAPI.followUser(userId)
@@ -129,7 +128,7 @@ export const followUserThunkCreator = (userId:number, followAction:string):think
         }
     }
 }
-export const putProfileDataThuncCreator = (data:profileType):(dispatch:Function) => Promise<responceType> => {
+export const putProfileDataThuncCreator = (data:profileType) => {
     return async (dispatch:Function) => {
         try {
             dispatch(setPutFetching(true));
@@ -140,7 +139,7 @@ export const putProfileDataThuncCreator = (data:profileType):(dispatch:Function)
         }
     };
 };
-export const addAvatarThuckCreator = (avatar: string):thinkType => {
+export const addAvatarThuckCreator = (avatar: string) => {
     return async (dispatch:Function) => {
         dispatch(setUpdateAvaISFetching(true))
         const responce:responceTypePhotos = await profileAPI.addAvatar(avatar)
@@ -160,13 +159,13 @@ export const getUserProfileThunkCreator = (userId:number) => {
         dispatch(setToogleFollow(followResponce))
     }
 }
-export const getStatusThunkCreator = (userId:number):thinkType => {
+export const getStatusThunkCreator = (userId:number) => {
     return async (dispatch:Function) => {
         const profileStatusResponce:string = await profileAPI.getProfileStatus(userId)
         dispatch(setProfileStatus(profileStatusResponce))
     }
 }
-export const updateStatusThuncCreator = (status:string):thinkType => {
+export const updateStatusThuncCreator = (status:string) => {
     return async (dispatch:Function) => {
         const updateProfileStatusResponce:string = await profileAPI.updateProfileStatus(status)
         dispatch(setProfileStatus(updateProfileStatusResponce))
