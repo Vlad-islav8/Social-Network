@@ -7,7 +7,6 @@ const inctance = axios.create({
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 })
-
 export const usersAPI = {
     getUsers(currenPages = 1, usersPages = 100) {
         return (
